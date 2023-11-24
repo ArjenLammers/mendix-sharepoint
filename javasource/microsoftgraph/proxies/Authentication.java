@@ -23,6 +23,7 @@ public class Authentication
 		DisplayName("DisplayName"),
 		AppId("AppId"),
 		Tenant_Id("Tenant_Id"),
+		Authority("Authority"),
 		Client_Secret("Client_Secret"),
 		Prompt("Prompt"),
 		IsActive("IsActive"),
@@ -52,7 +53,7 @@ public class Authentication
 		Response_types_supported("MicrosoftGraph.Response_types_supported"),
 		Claims_supported("MicrosoftGraph.Claims_supported");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -68,15 +69,17 @@ public class Authentication
 
 	public Authentication(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Authentication"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Authentication(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject authenticationMendixObject)
 	{
-		if (authenticationMendixObject == null)
+		if (authenticationMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Authentication", authenticationMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Authentication");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, authenticationMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.authenticationMendixObject = authenticationMendixObject;
 		this.context = context;
@@ -94,6 +97,9 @@ public class Authentication
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Authentication initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -108,14 +114,16 @@ public class Authentication
 
 	public static java.util.List<microsoftgraph.proxies.Authentication> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<microsoftgraph.proxies.Authentication> result = new java.util.ArrayList<microsoftgraph.proxies.Authentication>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//MicrosoftGraph.Authentication" + xpathConstraint))
-			result.add(microsoftgraph.proxies.Authentication.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> microsoftgraph.proxies.Authentication.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -124,6 +132,7 @@ public class Authentication
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -254,6 +263,51 @@ public class Authentication
 	}
 
 	/**
+	 * Set value of Authority
+	 * @param authority
+	 */
+	public final microsoftgraph.proxies.ENUM_Authority getAuthority()
+	{
+		return getAuthority(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Authority
+	 */
+	public final microsoftgraph.proxies.ENUM_Authority getAuthority(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		Object obj = getMendixObject().getValue(context, MemberNames.Authority.toString());
+		if (obj == null) {
+			return null;
+		}
+		return microsoftgraph.proxies.ENUM_Authority.valueOf((java.lang.String) obj);
+	}
+
+	/**
+	 * Set value of Authority
+	 * @param authority
+	 */
+	public final void setAuthority(microsoftgraph.proxies.ENUM_Authority authority)
+	{
+		setAuthority(getContext(), authority);
+	}
+
+	/**
+	 * Set value of Authority
+	 * @param context
+	 * @param authority
+	 */
+	public final void setAuthority(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_Authority authority)
+	{
+		if (authority != null) {
+			getMendixObject().setValue(context, MemberNames.Authority.toString(), authority.toString());
+		} else {
+			getMendixObject().setValue(context, MemberNames.Authority.toString(), null);
+		}
+	}
+
+	/**
 	 * @return value of Client_Secret
 	 */
 	public final java.lang.String getClient_Secret()
@@ -305,9 +359,9 @@ public class Authentication
 	public final microsoftgraph.proxies.ENUM_Prompt getPrompt(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.Prompt.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return microsoftgraph.proxies.ENUM_Prompt.valueOf((java.lang.String) obj);
 	}
 
@@ -327,10 +381,11 @@ public class Authentication
 	 */
 	public final void setPrompt(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_Prompt prompt)
 	{
-		if (prompt != null)
+		if (prompt != null) {
 			getMendixObject().setValue(context, MemberNames.Prompt.toString(), prompt.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Prompt.toString(), null);
+		}
 	}
 
 	/**
@@ -910,6 +965,7 @@ public class Authentication
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedScopes
 	 */
 	public final java.util.List<microsoftgraph.proxies.StringArrayWrapper> getSelectedScopes() throws com.mendix.core.CoreException
@@ -920,16 +976,19 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of SelectedScopes
+	 * @throws com.mendix.core.CoreException
 	 */
 	@SuppressWarnings("unchecked")
 	public final java.util.List<microsoftgraph.proxies.StringArrayWrapper> getSelectedScopes(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<microsoftgraph.proxies.StringArrayWrapper> result = new java.util.ArrayList<microsoftgraph.proxies.StringArrayWrapper>();
+		java.util.List<microsoftgraph.proxies.StringArrayWrapper> result = new java.util.ArrayList<>();
 		Object valueObject = getMendixObject().getValue(context, MemberNames.SelectedScopes.toString());
-		if (valueObject == null)
+		if (valueObject == null) {
 			return result;
-		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
+		}
+		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject)) {
 			result.add(microsoftgraph.proxies.StringArrayWrapper.initialize(context, mendixObject));
+		}
 		return result;
 	}
 
@@ -949,13 +1008,16 @@ public class Authentication
 	 */
 	public final void setSelectedScopes(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<microsoftgraph.proxies.StringArrayWrapper> selectedscopes)
 	{
-		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (microsoftgraph.proxies.StringArrayWrapper proxyObject : selectedscopes)
-			identifiers.add(proxyObject.getMendixObject().getId());
+		var identifiers = selectedscopes
+			.stream()
+			.map(proxyObject -> proxyObject.getMendixObject().getId())
+			.collect(java.util.stream.Collectors.toList());
+		
 		getMendixObject().setValue(context, MemberNames.SelectedScopes.toString(), identifiers);
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedResponseType
 	 */
 	public final microsoftgraph.proxies.StringArrayWrapper getSelectedResponseType() throws com.mendix.core.CoreException
@@ -966,13 +1028,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of SelectedResponseType
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArrayWrapper getSelectedResponseType(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArrayWrapper result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedResponseType.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArrayWrapper.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -992,13 +1056,15 @@ public class Authentication
 	 */
 	public final void setSelectedResponseType(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArrayWrapper selectedresponsetype)
 	{
-		if (selectedresponsetype == null)
+		if (selectedresponsetype == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedResponseType.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedResponseType.toString(), selectedresponsetype.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedResponseMode
 	 */
 	public final microsoftgraph.proxies.StringArrayWrapper getSelectedResponseMode() throws com.mendix.core.CoreException
@@ -1009,13 +1075,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of SelectedResponseMode
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArrayWrapper getSelectedResponseMode(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArrayWrapper result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedResponseMode.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArrayWrapper.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1035,13 +1103,15 @@ public class Authentication
 	 */
 	public final void setSelectedResponseMode(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArrayWrapper selectedresponsemode)
 	{
-		if (selectedresponsemode == null)
+		if (selectedresponsemode == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedResponseMode.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedResponseMode.toString(), selectedresponsemode.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Response_modes_supported
 	 */
 	public final microsoftgraph.proxies.StringArray getResponse_modes_supported() throws com.mendix.core.CoreException
@@ -1052,13 +1122,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Response_modes_supported
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getResponse_modes_supported(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Response_modes_supported.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1078,13 +1150,15 @@ public class Authentication
 	 */
 	public final void setResponse_modes_supported(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray response_modes_supported)
 	{
-		if (response_modes_supported == null)
+		if (response_modes_supported == null) {
 			getMendixObject().setValue(context, MemberNames.Response_modes_supported.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Response_modes_supported.toString(), response_modes_supported.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Scopes
 	 */
 	public final microsoftgraph.proxies.StringArray getScopes() throws com.mendix.core.CoreException
@@ -1095,13 +1169,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Scopes
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getScopes(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Scopes.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1121,13 +1197,15 @@ public class Authentication
 	 */
 	public final void setScopes(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray scopes)
 	{
-		if (scopes == null)
+		if (scopes == null) {
 			getMendixObject().setValue(context, MemberNames.Scopes.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Scopes.toString(), scopes.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Token_endpoint_auth_methods_supported
 	 */
 	public final microsoftgraph.proxies.StringArray getToken_endpoint_auth_methods_supported() throws com.mendix.core.CoreException
@@ -1138,13 +1216,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Token_endpoint_auth_methods_supported
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getToken_endpoint_auth_methods_supported(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Token_endpoint_auth_methods_supported.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1164,13 +1244,15 @@ public class Authentication
 	 */
 	public final void setToken_endpoint_auth_methods_supported(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray token_endpoint_auth_methods_supported)
 	{
-		if (token_endpoint_auth_methods_supported == null)
+		if (token_endpoint_auth_methods_supported == null) {
 			getMendixObject().setValue(context, MemberNames.Token_endpoint_auth_methods_supported.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Token_endpoint_auth_methods_supported.toString(), token_endpoint_auth_methods_supported.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Subject_types_supported
 	 */
 	public final microsoftgraph.proxies.StringArray getSubject_types_supported() throws com.mendix.core.CoreException
@@ -1181,13 +1263,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Subject_types_supported
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getSubject_types_supported(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Subject_types_supported.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1207,13 +1291,15 @@ public class Authentication
 	 */
 	public final void setSubject_types_supported(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray subject_types_supported)
 	{
-		if (subject_types_supported == null)
+		if (subject_types_supported == null) {
 			getMendixObject().setValue(context, MemberNames.Subject_types_supported.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Subject_types_supported.toString(), subject_types_supported.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Id_token_signing_alg_values
 	 */
 	public final microsoftgraph.proxies.StringArray getId_token_signing_alg_values() throws com.mendix.core.CoreException
@@ -1224,13 +1310,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Id_token_signing_alg_values
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getId_token_signing_alg_values(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Id_token_signing_alg_values.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1250,13 +1338,15 @@ public class Authentication
 	 */
 	public final void setId_token_signing_alg_values(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray id_token_signing_alg_values)
 	{
-		if (id_token_signing_alg_values == null)
+		if (id_token_signing_alg_values == null) {
 			getMendixObject().setValue(context, MemberNames.Id_token_signing_alg_values.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Id_token_signing_alg_values.toString(), id_token_signing_alg_values.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Response_types_supported
 	 */
 	public final microsoftgraph.proxies.StringArray getResponse_types_supported() throws com.mendix.core.CoreException
@@ -1267,13 +1357,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Response_types_supported
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getResponse_types_supported(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Response_types_supported.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1293,13 +1385,15 @@ public class Authentication
 	 */
 	public final void setResponse_types_supported(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray response_types_supported)
 	{
-		if (response_types_supported == null)
+		if (response_types_supported == null) {
 			getMendixObject().setValue(context, MemberNames.Response_types_supported.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Response_types_supported.toString(), response_types_supported.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Claims_supported
 	 */
 	public final microsoftgraph.proxies.StringArray getClaims_supported() throws com.mendix.core.CoreException
@@ -1310,13 +1404,15 @@ public class Authentication
 	/**
 	 * @param context
 	 * @return value of Claims_supported
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.StringArray getClaims_supported(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.StringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Claims_supported.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.StringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -1336,10 +1432,11 @@ public class Authentication
 	 */
 	public final void setClaims_supported(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.StringArray claims_supported)
 	{
-		if (claims_supported == null)
+		if (claims_supported == null) {
 			getMendixObject().setValue(context, MemberNames.Claims_supported.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Claims_supported.toString(), claims_supported.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -1361,9 +1458,9 @@ public class Authentication
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Authentication that = (microsoftgraph.proxies.Authentication) obj;
@@ -1383,7 +1480,7 @@ public class Authentication
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Authentication";
+		return entityName;
 	}
 
 	/**

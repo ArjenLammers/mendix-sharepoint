@@ -28,7 +28,7 @@ public class ParentReference
 		ParentReference_ListItem("Sharepoint.ParentReference_ListItem"),
 		DriveItem_ParentReference("Sharepoint.DriveItem_ParentReference");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -44,15 +44,17 @@ public class ParentReference
 
 	public ParentReference(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.ParentReference"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ParentReference(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject parentReferenceMendixObject)
 	{
-		if (parentReferenceMendixObject == null)
+		if (parentReferenceMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.ParentReference", parentReferenceMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.ParentReference");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, parentReferenceMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.parentReferenceMendixObject = parentReferenceMendixObject;
 		this.context = context;
@@ -70,6 +72,9 @@ public class ParentReference
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.ParentReference initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -84,6 +89,7 @@ public class ParentReference
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -92,6 +98,7 @@ public class ParentReference
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -294,6 +301,7 @@ public class ParentReference
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ParentReference_ListItem
 	 */
 	public final sharepoint.proxies.ListItem getParentReference_ListItem() throws com.mendix.core.CoreException
@@ -304,13 +312,15 @@ public class ParentReference
 	/**
 	 * @param context
 	 * @return value of ParentReference_ListItem
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.ListItem getParentReference_ListItem(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.ListItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ParentReference_ListItem.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.ListItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -330,13 +340,15 @@ public class ParentReference
 	 */
 	public final void setParentReference_ListItem(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ListItem parentreference_listitem)
 	{
-		if (parentreference_listitem == null)
+		if (parentreference_listitem == null) {
 			getMendixObject().setValue(context, MemberNames.ParentReference_ListItem.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ParentReference_ListItem.toString(), parentreference_listitem.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of DriveItem_ParentReference
 	 */
 	public final sharepoint.proxies.DriveItem getDriveItem_ParentReference() throws com.mendix.core.CoreException
@@ -347,13 +359,15 @@ public class ParentReference
 	/**
 	 * @param context
 	 * @return value of DriveItem_ParentReference
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.DriveItem getDriveItem_ParentReference(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.DriveItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.DriveItem_ParentReference.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.DriveItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -373,10 +387,11 @@ public class ParentReference
 	 */
 	public final void setDriveItem_ParentReference(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.DriveItem driveitem_parentreference)
 	{
-		if (driveitem_parentreference == null)
+		if (driveitem_parentreference == null) {
 			getMendixObject().setValue(context, MemberNames.DriveItem_ParentReference.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.DriveItem_ParentReference.toString(), driveitem_parentreference.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -398,9 +413,9 @@ public class ParentReference
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.ParentReference that = (sharepoint.proxies.ParentReference) obj;
@@ -420,7 +435,7 @@ public class ParentReference
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.ParentReference";
+		return entityName;
 	}
 
 	/**

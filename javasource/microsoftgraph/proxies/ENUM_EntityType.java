@@ -6,29 +6,28 @@ package microsoftgraph.proxies;
 
 public enum ENUM_EntityType
 {
-	message(new java.lang.String[][] { new java.lang.String[] { "en_US", "Email messages" } }),
-	event(new java.lang.String[][] { new java.lang.String[] { "en_US", "Calendar events" } }),
-	drive(new java.lang.String[][] { new java.lang.String[] { "en_US", "Document libraries" } }),
-	driveItem(new java.lang.String[][] { new java.lang.String[] { "en_US", "Files, folders, pages, and news" } }),
-	list(new java.lang.String[][] { new java.lang.String[] { "en_US", "Lists" } }),
-	listItem(new java.lang.String[][] { new java.lang.String[] { "en_US", "List items" } }),
-	site(new java.lang.String[][] { new java.lang.String[] { "en_US", "Sites in SharePoint" } }),
-	person(new java.lang.String[][] { new java.lang.String[] { "en_US", "People" } });
+	message(new java.lang.String[][] { new java.lang.String[] { "en_US", "Email messages" }, new java.lang.String[] { "nl_NL", "email berichten" } }),
+	event(new java.lang.String[][] { new java.lang.String[] { "en_US", "Calendar events" }, new java.lang.String[] { "nl_NL", "Agenda gebeurtenissen" } }),
+	drive(new java.lang.String[][] { new java.lang.String[] { "en_US", "Document libraries" }, new java.lang.String[] { "nl_NL", "Document bibliotheken" } }),
+	driveItem(new java.lang.String[][] { new java.lang.String[] { "en_US", "Files, folders, pages, and news" }, new java.lang.String[] { "nl_NL", "Bestanden, mappen, paginas en nieuws" } }),
+	list(new java.lang.String[][] { new java.lang.String[] { "en_US", "Lists" }, new java.lang.String[] { "nl_NL", "Lijsten" } }),
+	listItem(new java.lang.String[][] { new java.lang.String[] { "en_US", "List items" }, new java.lang.String[] { "nl_NL", "Lijst onderdeel" } }),
+	site(new java.lang.String[][] { new java.lang.String[] { "en_US", "Sites in SharePoint" }, new java.lang.String[] { "nl_NL", "Sites in SharePoint" } }),
+	person(new java.lang.String[][] { new java.lang.String[] { "en_US", "People" }, new java.lang.String[] { "nl_NL", "Personen" } });
 
-	private java.util.Map<java.lang.String, java.lang.String> captions;
+	private final java.util.Map<java.lang.String, java.lang.String> captions;
 
 	private ENUM_EntityType(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
-		for (java.lang.String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<>();
+		for (java.lang.String[] captionString : captionStrings) {
 			captions.put(captionString[0], captionString[1]);
+		}
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		if (captions.containsKey(languageCode))
-			return captions.get(languageCode);
-		return captions.get("en_US");
+		return captions.getOrDefault(languageCode, "en_US");
 	}
 
 	public java.lang.String getCaption()

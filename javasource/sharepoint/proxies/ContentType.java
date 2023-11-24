@@ -25,7 +25,7 @@ public class ContentType
 		Description("Description"),
 		ListItemContentType("Sharepoint.ListItemContentType");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,15 +41,17 @@ public class ContentType
 
 	public ContentType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.ContentType"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ContentType(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject contentTypeMendixObject)
 	{
-		if (contentTypeMendixObject == null)
+		if (contentTypeMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.ContentType", contentTypeMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.ContentType");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, contentTypeMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.contentTypeMendixObject = contentTypeMendixObject;
 		this.context = context;
@@ -67,6 +69,9 @@ public class ContentType
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.ContentType initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -81,6 +86,7 @@ public class ContentType
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -89,6 +95,7 @@ public class ContentType
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -219,6 +226,7 @@ public class ContentType
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ListItemContentType
 	 */
 	public final sharepoint.proxies.ListItem getListItemContentType() throws com.mendix.core.CoreException
@@ -229,13 +237,15 @@ public class ContentType
 	/**
 	 * @param context
 	 * @return value of ListItemContentType
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.ListItem getListItemContentType(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.ListItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ListItemContentType.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.ListItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -255,10 +265,11 @@ public class ContentType
 	 */
 	public final void setListItemContentType(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ListItem listitemcontenttype)
 	{
-		if (listitemcontenttype == null)
+		if (listitemcontenttype == null) {
 			getMendixObject().setValue(context, MemberNames.ListItemContentType.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ListItemContentType.toString(), listitemcontenttype.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -280,9 +291,9 @@ public class ContentType
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.ContentType that = (sharepoint.proxies.ContentType) obj;
@@ -302,7 +313,7 @@ public class ContentType
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.ContentType";
+		return entityName;
 	}
 
 	/**

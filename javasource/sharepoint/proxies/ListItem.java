@@ -38,7 +38,7 @@ public class ListItem
 		ListItemContentType("Sharepoint.ListItemContentType"),
 		ParentReference_ListItem("Sharepoint.ParentReference_ListItem");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -54,15 +54,17 @@ public class ListItem
 
 	public ListItem(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.ListItem"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ListItem(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject listItemMendixObject)
 	{
-		if (listItemMendixObject == null)
+		if (listItemMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.ListItem", listItemMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.ListItem");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, listItemMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.listItemMendixObject = listItemMendixObject;
 		this.context = context;
@@ -80,6 +82,9 @@ public class ListItem
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.ListItem initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -94,6 +99,7 @@ public class ListItem
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -102,6 +108,7 @@ public class ListItem
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -592,6 +599,7 @@ public class ListItem
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ListItem_Explorer
 	 */
 	public final sharepoint.proxies.Explorer getListItem_Explorer() throws com.mendix.core.CoreException
@@ -602,13 +610,15 @@ public class ListItem
 	/**
 	 * @param context
 	 * @return value of ListItem_Explorer
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getListItem_Explorer(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ListItem_Explorer.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -628,13 +638,15 @@ public class ListItem
 	 */
 	public final void setListItem_Explorer(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer listitem_explorer)
 	{
-		if (listitem_explorer == null)
+		if (listitem_explorer == null) {
 			getMendixObject().setValue(context, MemberNames.ListItem_Explorer.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ListItem_Explorer.toString(), listitem_explorer.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of DriveItem_ListItem
 	 */
 	public final sharepoint.proxies.DriveItem getDriveItem_ListItem() throws com.mendix.core.CoreException
@@ -645,13 +657,15 @@ public class ListItem
 	/**
 	 * @param context
 	 * @return value of DriveItem_ListItem
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.DriveItem getDriveItem_ListItem(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.DriveItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.DriveItem_ListItem.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.DriveItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -671,13 +685,15 @@ public class ListItem
 	 */
 	public final void setDriveItem_ListItem(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.DriveItem driveitem_listitem)
 	{
-		if (driveitem_listitem == null)
+		if (driveitem_listitem == null) {
 			getMendixObject().setValue(context, MemberNames.DriveItem_ListItem.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.DriveItem_ListItem.toString(), driveitem_listitem.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ListItemContentType
 	 */
 	public final sharepoint.proxies.ContentType getListItemContentType() throws com.mendix.core.CoreException
@@ -688,13 +704,15 @@ public class ListItem
 	/**
 	 * @param context
 	 * @return value of ListItemContentType
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.ContentType getListItemContentType(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.ContentType result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ListItemContentType.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.ContentType.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -714,13 +732,15 @@ public class ListItem
 	 */
 	public final void setListItemContentType(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ContentType listitemcontenttype)
 	{
-		if (listitemcontenttype == null)
+		if (listitemcontenttype == null) {
 			getMendixObject().setValue(context, MemberNames.ListItemContentType.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ListItemContentType.toString(), listitemcontenttype.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ParentReference_ListItem
 	 */
 	public final sharepoint.proxies.ParentReference getParentReference_ListItem() throws com.mendix.core.CoreException
@@ -731,13 +751,15 @@ public class ListItem
 	/**
 	 * @param context
 	 * @return value of ParentReference_ListItem
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.ParentReference getParentReference_ListItem(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.ParentReference result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ParentReference_ListItem.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.ParentReference.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -757,10 +779,11 @@ public class ListItem
 	 */
 	public final void setParentReference_ListItem(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ParentReference parentreference_listitem)
 	{
-		if (parentreference_listitem == null)
+		if (parentreference_listitem == null) {
 			getMendixObject().setValue(context, MemberNames.ParentReference_ListItem.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ParentReference_ListItem.toString(), parentreference_listitem.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -782,9 +805,9 @@ public class ListItem
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.ListItem that = (sharepoint.proxies.ListItem) obj;
@@ -804,7 +827,7 @@ public class ListItem
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.ListItem";
+		return entityName;
 	}
 
 	/**

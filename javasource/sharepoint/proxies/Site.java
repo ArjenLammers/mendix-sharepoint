@@ -30,7 +30,7 @@ public class Site
 		Site_SearchSitesResult("Sharepoint.Site_SearchSitesResult"),
 		SelectedSite("Sharepoint.SelectedSite");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -46,15 +46,17 @@ public class Site
 
 	public Site(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.Site"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Site(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject siteMendixObject)
 	{
-		if (siteMendixObject == null)
+		if (siteMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.Site", siteMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.Site");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, siteMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.siteMendixObject = siteMendixObject;
 		this.context = context;
@@ -72,6 +74,9 @@ public class Site
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.Site initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -86,6 +91,7 @@ public class Site
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -94,6 +100,7 @@ public class Site
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -368,6 +375,7 @@ public class Site
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Site_SearchSitesResult
 	 */
 	public final sharepoint.proxies.SearchSitesResult getSite_SearchSitesResult() throws com.mendix.core.CoreException
@@ -378,13 +386,15 @@ public class Site
 	/**
 	 * @param context
 	 * @return value of Site_SearchSitesResult
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.SearchSitesResult getSite_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.SearchSitesResult result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Site_SearchSitesResult.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.SearchSitesResult.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -404,13 +414,15 @@ public class Site
 	 */
 	public final void setSite_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.SearchSitesResult site_searchsitesresult)
 	{
-		if (site_searchsitesresult == null)
+		if (site_searchsitesresult == null) {
 			getMendixObject().setValue(context, MemberNames.Site_SearchSitesResult.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Site_SearchSitesResult.toString(), site_searchsitesresult.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedSite
 	 */
 	public final sharepoint.proxies.Explorer getSelectedSite() throws com.mendix.core.CoreException
@@ -421,13 +433,15 @@ public class Site
 	/**
 	 * @param context
 	 * @return value of SelectedSite
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getSelectedSite(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedSite.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -447,10 +461,11 @@ public class Site
 	 */
 	public final void setSelectedSite(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer selectedsite)
 	{
-		if (selectedsite == null)
+		if (selectedsite == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedSite.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedSite.toString(), selectedsite.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -472,9 +487,9 @@ public class Site
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.Site that = (sharepoint.proxies.Site) obj;
@@ -494,7 +509,7 @@ public class Site
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.Site";
+		return entityName;
 	}
 
 	/**

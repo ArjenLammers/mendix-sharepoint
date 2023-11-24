@@ -18,7 +18,7 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	{
 		BusinessPhones_User("MicrosoftGraph.BusinessPhones_User");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -34,14 +34,15 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 
 	public BusinessPhones(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.BusinessPhones"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected BusinessPhones(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject businessPhonesMendixObject)
 	{
 		super(context, businessPhonesMendixObject);
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.BusinessPhones", businessPhonesMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.BusinessPhones");
+		if (!com.mendix.core.Core.isSubClassOf(entityName, businessPhonesMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 	}
 
 	/**
@@ -56,6 +57,9 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.BusinessPhones initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -69,6 +73,7 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of BusinessPhones_User
 	 */
 	public final microsoftgraph.proxies.User getBusinessPhones_User() throws com.mendix.core.CoreException
@@ -79,13 +84,15 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	/**
 	 * @param context
 	 * @return value of BusinessPhones_User
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.User getBusinessPhones_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.User result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.BusinessPhones_User.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.User.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -105,18 +112,19 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	 */
 	public final void setBusinessPhones_User(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.User businessphones_user)
 	{
-		if (businessphones_user == null)
+		if (businessphones_user == null) {
 			getMendixObject().setValue(context, MemberNames.BusinessPhones_User.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.BusinessPhones_User.toString(), businessphones_user.getMendixObject().getId());
+		}
 	}
 
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.BusinessPhones that = (microsoftgraph.proxies.BusinessPhones) obj;
@@ -136,7 +144,7 @@ public class BusinessPhones extends microsoftgraph.proxies.NPStringArray
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.BusinessPhones";
+		return entityName;
 	}
 
 	/**

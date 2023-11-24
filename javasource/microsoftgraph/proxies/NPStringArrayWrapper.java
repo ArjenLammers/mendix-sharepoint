@@ -23,7 +23,7 @@ public class NPStringArrayWrapper
 		Value("Value"),
 		NPStringArrayWrapper_NPStringArray("MicrosoftGraph.NPStringArrayWrapper_NPStringArray");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -39,15 +39,17 @@ public class NPStringArrayWrapper
 
 	public NPStringArrayWrapper(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.NPStringArrayWrapper"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected NPStringArrayWrapper(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject nPStringArrayWrapperMendixObject)
 	{
-		if (nPStringArrayWrapperMendixObject == null)
+		if (nPStringArrayWrapperMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.NPStringArrayWrapper", nPStringArrayWrapperMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.NPStringArrayWrapper");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, nPStringArrayWrapperMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.nPStringArrayWrapperMendixObject = nPStringArrayWrapperMendixObject;
 		this.context = context;
@@ -65,6 +67,9 @@ public class NPStringArrayWrapper
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.NPStringArrayWrapper initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,6 +84,7 @@ public class NPStringArrayWrapper
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -87,6 +93,7 @@ public class NPStringArrayWrapper
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -145,6 +152,7 @@ public class NPStringArrayWrapper
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of NPStringArrayWrapper_NPStringArray
 	 */
 	public final microsoftgraph.proxies.NPStringArray getNPStringArrayWrapper_NPStringArray() throws com.mendix.core.CoreException
@@ -155,13 +163,15 @@ public class NPStringArrayWrapper
 	/**
 	 * @param context
 	 * @return value of NPStringArrayWrapper_NPStringArray
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.NPStringArray getNPStringArrayWrapper_NPStringArray(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.NPStringArray result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.NPStringArrayWrapper_NPStringArray.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.NPStringArray.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -181,10 +191,11 @@ public class NPStringArrayWrapper
 	 */
 	public final void setNPStringArrayWrapper_NPStringArray(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.NPStringArray npstringarraywrapper_npstringarray)
 	{
-		if (npstringarraywrapper_npstringarray == null)
+		if (npstringarraywrapper_npstringarray == null) {
 			getMendixObject().setValue(context, MemberNames.NPStringArrayWrapper_NPStringArray.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.NPStringArrayWrapper_NPStringArray.toString(), npstringarraywrapper_npstringarray.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -206,9 +217,9 @@ public class NPStringArrayWrapper
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.NPStringArrayWrapper that = (microsoftgraph.proxies.NPStringArrayWrapper) obj;
@@ -228,7 +239,7 @@ public class NPStringArrayWrapper
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.NPStringArrayWrapper";
+		return entityName;
 	}
 
 	/**

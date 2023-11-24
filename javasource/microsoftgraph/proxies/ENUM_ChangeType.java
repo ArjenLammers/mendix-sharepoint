@@ -6,28 +6,27 @@ package microsoftgraph.proxies;
 
 public enum ENUM_ChangeType
 {
-	created(new java.lang.String[][] { new java.lang.String[] { "en_US", "created" } }),
-	updated(new java.lang.String[][] { new java.lang.String[] { "en_US", "updated" } }),
-	deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "deleted" } }),
-	created_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,deleted" } }),
-	updated_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "updated,deleted" } }),
-	created_updated(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,updated" } }),
-	created_updated_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,updated,deleted" } });
+	created(new java.lang.String[][] { new java.lang.String[] { "en_US", "created" }, new java.lang.String[] { "nl_NL", "created" } }),
+	updated(new java.lang.String[][] { new java.lang.String[] { "en_US", "updated" }, new java.lang.String[] { "nl_NL", "updated" } }),
+	deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "deleted" }, new java.lang.String[] { "nl_NL", "deleted" } }),
+	created_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,deleted" }, new java.lang.String[] { "nl_NL", "created,deleted" } }),
+	updated_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "updated,deleted" }, new java.lang.String[] { "nl_NL", "updated,deleted" } }),
+	created_updated(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,updated" }, new java.lang.String[] { "nl_NL", "created,updated" } }),
+	created_updated_deleted(new java.lang.String[][] { new java.lang.String[] { "en_US", "created,updated,deleted" }, new java.lang.String[] { "nl_NL", "created,updated,deleted" } });
 
-	private java.util.Map<java.lang.String, java.lang.String> captions;
+	private final java.util.Map<java.lang.String, java.lang.String> captions;
 
 	private ENUM_ChangeType(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
-		for (java.lang.String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<>();
+		for (java.lang.String[] captionString : captionStrings) {
 			captions.put(captionString[0], captionString[1]);
+		}
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		if (captions.containsKey(languageCode))
-			return captions.get(languageCode);
-		return captions.get("en_US");
+		return captions.getOrDefault(languageCode, "en_US");
 	}
 
 	public java.lang.String getCaption()

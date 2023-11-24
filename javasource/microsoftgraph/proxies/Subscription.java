@@ -35,10 +35,11 @@ public class Subscription
 		LatestSupportedTlsVersion("LatestSupportedTlsVersion"),
 		NotificationContentType("NotificationContentType"),
 		NotificationQueryOptions("NotificationQueryOptions"),
+		NotificationUrlAppId("NotificationUrlAppId"),
 		Subscription_Authorization("MicrosoftGraph.Subscription_Authorization"),
 		Subscription_User("MicrosoftGraph.Subscription_User");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -54,15 +55,17 @@ public class Subscription
 
 	public Subscription(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Subscription"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Subscription(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject subscriptionMendixObject)
 	{
-		if (subscriptionMendixObject == null)
+		if (subscriptionMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Subscription", subscriptionMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Subscription");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, subscriptionMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.subscriptionMendixObject = subscriptionMendixObject;
 		this.context = context;
@@ -80,6 +83,9 @@ public class Subscription
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Subscription initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -94,14 +100,16 @@ public class Subscription
 
 	public static java.util.List<microsoftgraph.proxies.Subscription> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<microsoftgraph.proxies.Subscription> result = new java.util.ArrayList<microsoftgraph.proxies.Subscription>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//MicrosoftGraph.Subscription" + xpathConstraint))
-			result.add(microsoftgraph.proxies.Subscription.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> microsoftgraph.proxies.Subscription.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -110,6 +118,7 @@ public class Subscription
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -183,9 +192,9 @@ public class Subscription
 	public final microsoftgraph.proxies.ENUM_ChangeType getChangeType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.ChangeType.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return microsoftgraph.proxies.ENUM_ChangeType.valueOf((java.lang.String) obj);
 	}
 
@@ -205,10 +214,11 @@ public class Subscription
 	 */
 	public final void setChangeType(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_ChangeType changetype)
 	{
-		if (changetype != null)
+		if (changetype != null) {
 			getMendixObject().setValue(context, MemberNames.ChangeType.toString(), changetype.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ChangeType.toString(), null);
+		}
 	}
 
 	/**
@@ -466,7 +476,7 @@ public class Subscription
 	/**
 	 * @return value of IncludeResourceData
 	 */
-	public final java.lang.Boolean getIncludeResourceData()
+	public final java.lang.String getIncludeResourceData()
 	{
 		return getIncludeResourceData(getContext());
 	}
@@ -475,16 +485,16 @@ public class Subscription
 	 * @param context
 	 * @return value of IncludeResourceData
 	 */
-	public final java.lang.Boolean getIncludeResourceData(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getIncludeResourceData(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.IncludeResourceData.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.IncludeResourceData.toString());
 	}
 
 	/**
 	 * Set value of IncludeResourceData
 	 * @param includeresourcedata
 	 */
-	public final void setIncludeResourceData(java.lang.Boolean includeresourcedata)
+	public final void setIncludeResourceData(java.lang.String includeresourcedata)
 	{
 		setIncludeResourceData(getContext(), includeresourcedata);
 	}
@@ -494,7 +504,7 @@ public class Subscription
 	 * @param context
 	 * @param includeresourcedata
 	 */
-	public final void setIncludeResourceData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean includeresourcedata)
+	public final void setIncludeResourceData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String includeresourcedata)
 	{
 		getMendixObject().setValue(context, MemberNames.IncludeResourceData.toString(), includeresourcedata);
 	}
@@ -680,6 +690,43 @@ public class Subscription
 	}
 
 	/**
+	 * @return value of NotificationUrlAppId
+	 */
+	public final java.lang.String getNotificationUrlAppId()
+	{
+		return getNotificationUrlAppId(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of NotificationUrlAppId
+	 */
+	public final java.lang.String getNotificationUrlAppId(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.NotificationUrlAppId.toString());
+	}
+
+	/**
+	 * Set value of NotificationUrlAppId
+	 * @param notificationurlappid
+	 */
+	public final void setNotificationUrlAppId(java.lang.String notificationurlappid)
+	{
+		setNotificationUrlAppId(getContext(), notificationurlappid);
+	}
+
+	/**
+	 * Set value of NotificationUrlAppId
+	 * @param context
+	 * @param notificationurlappid
+	 */
+	public final void setNotificationUrlAppId(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String notificationurlappid)
+	{
+		getMendixObject().setValue(context, MemberNames.NotificationUrlAppId.toString(), notificationurlappid);
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Subscription_Authorization
 	 */
 	public final microsoftgraph.proxies.Authorization getSubscription_Authorization() throws com.mendix.core.CoreException
@@ -690,13 +737,15 @@ public class Subscription
 	/**
 	 * @param context
 	 * @return value of Subscription_Authorization
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.Authorization getSubscription_Authorization(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.Authorization result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Subscription_Authorization.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.Authorization.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -716,13 +765,15 @@ public class Subscription
 	 */
 	public final void setSubscription_Authorization(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Authorization subscription_authorization)
 	{
-		if (subscription_authorization == null)
+		if (subscription_authorization == null) {
 			getMendixObject().setValue(context, MemberNames.Subscription_Authorization.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Subscription_Authorization.toString(), subscription_authorization.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Subscription_User
 	 */
 	public final system.proxies.User getSubscription_User() throws com.mendix.core.CoreException
@@ -733,13 +784,15 @@ public class Subscription
 	/**
 	 * @param context
 	 * @return value of Subscription_User
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final system.proxies.User getSubscription_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		system.proxies.User result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Subscription_User.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = system.proxies.User.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -759,10 +812,11 @@ public class Subscription
 	 */
 	public final void setSubscription_User(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.User subscription_user)
 	{
-		if (subscription_user == null)
+		if (subscription_user == null) {
 			getMendixObject().setValue(context, MemberNames.Subscription_User.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Subscription_User.toString(), subscription_user.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -784,9 +838,9 @@ public class Subscription
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Subscription that = (microsoftgraph.proxies.Subscription) obj;
@@ -806,7 +860,7 @@ public class Subscription
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Subscription";
+		return entityName;
 	}
 
 	/**

@@ -28,7 +28,7 @@ public class Explorer
 		SelectedDrive("Sharepoint.SelectedDrive"),
 		Explorer_Authorization("Sharepoint.Explorer_Authorization");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -44,15 +44,17 @@ public class Explorer
 
 	public Explorer(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.Explorer"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Explorer(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject explorerMendixObject)
 	{
-		if (explorerMendixObject == null)
+		if (explorerMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.Explorer", explorerMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.Explorer");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, explorerMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.explorerMendixObject = explorerMendixObject;
 		this.context = context;
@@ -70,6 +72,9 @@ public class Explorer
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.Explorer initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -84,6 +89,7 @@ public class Explorer
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -92,6 +98,7 @@ public class Explorer
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -150,6 +157,7 @@ public class Explorer
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of OpenSiteByIdRequest_Explorer
 	 */
 	public final sharepoint.proxies.OpenSiteByIdRequest getOpenSiteByIdRequest_Explorer() throws com.mendix.core.CoreException
@@ -160,13 +168,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of OpenSiteByIdRequest_Explorer
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.OpenSiteByIdRequest getOpenSiteByIdRequest_Explorer(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.OpenSiteByIdRequest result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.OpenSiteByIdRequest.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -186,13 +196,15 @@ public class Explorer
 	 */
 	public final void setOpenSiteByIdRequest_Explorer(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.OpenSiteByIdRequest opensitebyidrequest_explorer)
 	{
-		if (opensitebyidrequest_explorer == null)
+		if (opensitebyidrequest_explorer == null) {
 			getMendixObject().setValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString(), opensitebyidrequest_explorer.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedSite
 	 */
 	public final sharepoint.proxies.Site getSelectedSite() throws com.mendix.core.CoreException
@@ -203,13 +215,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of SelectedSite
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Site getSelectedSite(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Site result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedSite.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Site.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -229,13 +243,15 @@ public class Explorer
 	 */
 	public final void setSelectedSite(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Site selectedsite)
 	{
-		if (selectedsite == null)
+		if (selectedsite == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedSite.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedSite.toString(), selectedsite.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Explorer_SearchSitesResult
 	 */
 	public final sharepoint.proxies.SearchSitesResult getExplorer_SearchSitesResult() throws com.mendix.core.CoreException
@@ -246,13 +262,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of Explorer_SearchSitesResult
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.SearchSitesResult getExplorer_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.SearchSitesResult result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Explorer_SearchSitesResult.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.SearchSitesResult.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -272,13 +290,15 @@ public class Explorer
 	 */
 	public final void setExplorer_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.SearchSitesResult explorer_searchsitesresult)
 	{
-		if (explorer_searchsitesresult == null)
+		if (explorer_searchsitesresult == null) {
 			getMendixObject().setValue(context, MemberNames.Explorer_SearchSitesResult.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Explorer_SearchSitesResult.toString(), explorer_searchsitesresult.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedList
 	 */
 	public final sharepoint.proxies.List getSelectedList() throws com.mendix.core.CoreException
@@ -289,13 +309,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of SelectedList
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.List getSelectedList(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.List result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedList.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.List.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -315,13 +337,15 @@ public class Explorer
 	 */
 	public final void setSelectedList(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.List selectedlist)
 	{
-		if (selectedlist == null)
+		if (selectedlist == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedList.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedList.toString(), selectedlist.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedDrive
 	 */
 	public final sharepoint.proxies.Drive getSelectedDrive() throws com.mendix.core.CoreException
@@ -332,13 +356,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of SelectedDrive
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Drive getSelectedDrive(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Drive result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedDrive.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Drive.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -358,13 +384,15 @@ public class Explorer
 	 */
 	public final void setSelectedDrive(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Drive selecteddrive)
 	{
-		if (selecteddrive == null)
+		if (selecteddrive == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedDrive.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedDrive.toString(), selecteddrive.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Explorer_Authorization
 	 */
 	public final microsoftgraph.proxies.Authorization getExplorer_Authorization() throws com.mendix.core.CoreException
@@ -375,13 +403,15 @@ public class Explorer
 	/**
 	 * @param context
 	 * @return value of Explorer_Authorization
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.Authorization getExplorer_Authorization(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.Authorization result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Explorer_Authorization.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.Authorization.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -401,10 +431,11 @@ public class Explorer
 	 */
 	public final void setExplorer_Authorization(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Authorization explorer_authorization)
 	{
-		if (explorer_authorization == null)
+		if (explorer_authorization == null) {
 			getMendixObject().setValue(context, MemberNames.Explorer_Authorization.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Explorer_Authorization.toString(), explorer_authorization.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -426,9 +457,9 @@ public class Explorer
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.Explorer that = (sharepoint.proxies.Explorer) obj;
@@ -448,7 +479,7 @@ public class Explorer
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.Explorer";
+		return entityName;
 	}
 
 	/**

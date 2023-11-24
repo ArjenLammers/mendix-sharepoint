@@ -22,7 +22,7 @@ public class Children
 	{
 		Parent("Sharepoint.Parent");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -38,15 +38,17 @@ public class Children
 
 	public Children(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.Children"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Children(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject childrenMendixObject)
 	{
-		if (childrenMendixObject == null)
+		if (childrenMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.Children", childrenMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.Children");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, childrenMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.childrenMendixObject = childrenMendixObject;
 		this.context = context;
@@ -64,6 +66,9 @@ public class Children
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.Children initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -78,6 +83,7 @@ public class Children
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -86,6 +92,7 @@ public class Children
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -108,6 +115,7 @@ public class Children
 		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Parent
 	 */
 	public final sharepoint.proxies.DriveItem getParent() throws com.mendix.core.CoreException
@@ -118,13 +126,15 @@ public class Children
 	/**
 	 * @param context
 	 * @return value of Parent
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.DriveItem getParent(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.DriveItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Parent.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.DriveItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -144,10 +154,11 @@ public class Children
 	 */
 	public final void setParent(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.DriveItem parent)
 	{
-		if (parent == null)
+		if (parent == null) {
 			getMendixObject().setValue(context, MemberNames.Parent.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Parent.toString(), parent.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -169,9 +180,9 @@ public class Children
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.Children that = (sharepoint.proxies.Children) obj;
@@ -191,7 +202,7 @@ public class Children
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.Children";
+		return entityName;
 	}
 
 	/**

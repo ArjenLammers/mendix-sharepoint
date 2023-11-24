@@ -23,7 +23,7 @@ public class OpenSiteByIdRequest
 		_id("_id"),
 		OpenSiteByIdRequest_Explorer("Sharepoint.OpenSiteByIdRequest_Explorer");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -39,15 +39,17 @@ public class OpenSiteByIdRequest
 
 	public OpenSiteByIdRequest(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.OpenSiteByIdRequest"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected OpenSiteByIdRequest(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject openSiteByIdRequestMendixObject)
 	{
-		if (openSiteByIdRequestMendixObject == null)
+		if (openSiteByIdRequestMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.OpenSiteByIdRequest", openSiteByIdRequestMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.OpenSiteByIdRequest");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, openSiteByIdRequestMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.openSiteByIdRequestMendixObject = openSiteByIdRequestMendixObject;
 		this.context = context;
@@ -65,6 +67,9 @@ public class OpenSiteByIdRequest
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.OpenSiteByIdRequest initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,6 +84,7 @@ public class OpenSiteByIdRequest
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -87,6 +93,7 @@ public class OpenSiteByIdRequest
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -145,6 +152,7 @@ public class OpenSiteByIdRequest
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of OpenSiteByIdRequest_Explorer
 	 */
 	public final sharepoint.proxies.Explorer getOpenSiteByIdRequest_Explorer() throws com.mendix.core.CoreException
@@ -155,13 +163,15 @@ public class OpenSiteByIdRequest
 	/**
 	 * @param context
 	 * @return value of OpenSiteByIdRequest_Explorer
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getOpenSiteByIdRequest_Explorer(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -181,10 +191,11 @@ public class OpenSiteByIdRequest
 	 */
 	public final void setOpenSiteByIdRequest_Explorer(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer opensitebyidrequest_explorer)
 	{
-		if (opensitebyidrequest_explorer == null)
+		if (opensitebyidrequest_explorer == null) {
 			getMendixObject().setValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.OpenSiteByIdRequest_Explorer.toString(), opensitebyidrequest_explorer.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -206,9 +217,9 @@ public class OpenSiteByIdRequest
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.OpenSiteByIdRequest that = (sharepoint.proxies.OpenSiteByIdRequest) obj;
@@ -228,7 +239,7 @@ public class OpenSiteByIdRequest
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.OpenSiteByIdRequest";
+		return entityName;
 	}
 
 	/**

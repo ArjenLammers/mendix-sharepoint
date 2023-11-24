@@ -38,7 +38,7 @@ public class GetFileFragment extends CustomJavaAction<IMendixObject>
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.fileDocument = __fileDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __fileDocument);
+		this.fileDocument = this.__fileDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __fileDocument);
 
 		// BEGIN USER CODE
 		File tmpFile = File.createTempFile("fragment", ".tmp");
@@ -72,6 +72,7 @@ public class GetFileFragment extends CustomJavaAction<IMendixObject>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

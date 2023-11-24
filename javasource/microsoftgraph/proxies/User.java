@@ -4,12 +4,11 @@
 
 package microsoftgraph.proxies;
 
-public class User
+/**
+ * Users are the representation of an Azure Active Directory (Azure AD) work or school user account or a Microsoft account in Microsoft Graph. The user resource in Microsoft Graph is a hub from which you can access the relationships and resources that are relevant to your users.
+ */
+public class User extends microsoftgraph.proxies.DirectoryObject
 {
-	private final com.mendix.systemwideinterfaces.core.IMendixObject userMendixObject;
-
-	private final com.mendix.systemwideinterfaces.core.IContext context;
-
 	/**
 	 * Internal name of this entity
 	 */
@@ -31,11 +30,32 @@ public class User
 		UserPrincipalName("UserPrincipalName"),
 		_odata_context("_odata_context"),
 		_odata_type("_odata_type"),
-		_id("_id"),
+		UserIdentityType("UserIdentityType"),
+		AboutMe("AboutMe"),
+		AccountEnabled("AccountEnabled"),
+		AgeGroup("AgeGroup"),
+		Birthday("Birthday"),
+		CompanyName("CompanyName"),
+		EmployeeId("EmployeeId"),
+		UserType("UserType"),
+		MailNickname("MailNickname"),
+		_Id("_Id"),
+		DeletedDateTime("DeletedDateTime"),
 		BusinessPhones_User("MicrosoftGraph.BusinessPhones_User"),
-		User_Request("MicrosoftGraph.User_Request");
+		User_IdentitySet("MicrosoftGraph.User_IdentitySet"),
+		User_Value("MicrosoftGraph.User_Value"),
+		DirectReports("MicrosoftGraph.DirectReports"),
+		PasswordProfile_User("MicrosoftGraph.PasswordProfile_User"),
+		Owners("MicrosoftGraph.Owners"),
+		User_ProfilePhoto("MicrosoftGraph.User_ProfilePhoto"),
+		MicrosoftUser("MicrosoftGraph.MicrosoftUser"),
+		OwnedObjects("MicrosoftGraph.OwnedObjects"),
+		CreatedObjects("MicrosoftGraph.CreatedObjects"),
+		TransitiveMemberOf("MicrosoftGraph.TransitiveMemberOf"),
+		DirectoryObject_Value("MicrosoftGraph.DirectoryObject_Value"),
+		Members("MicrosoftGraph.Members");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -51,18 +71,15 @@ public class User
 
 	public User(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.User"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected User(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject userMendixObject)
 	{
-		if (userMendixObject == null)
-			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.User", userMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.User");
-
-		this.userMendixObject = userMendixObject;
-		this.context = context;
+		super(context, userMendixObject);
+		if (!com.mendix.core.Core.isSubClassOf(entityName, userMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 	}
 
 	/**
@@ -77,12 +94,12 @@ public class User
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.User initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Participant", mendixObject.getType()))
-			return microsoftgraph.proxies.Participant.initialize(context, mendixObject);
-
 		return new microsoftgraph.proxies.User(context, mendixObject);
 	}
 
@@ -92,37 +109,6 @@ public class User
 		return microsoftgraph.proxies.User.initialize(context, mendixObject);
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of DisplayName
 	 */
@@ -520,42 +506,340 @@ public class User
 	}
 
 	/**
-	 * @return value of _id
+	 * Set value of UserIdentityType
+	 * @param useridentitytype
 	 */
-	public final java.lang.String get_id()
+	public final microsoftgraph.proxies.ENUM_TeamworkUserIdentityType getUserIdentityType()
 	{
-		return get_id(getContext());
+		return getUserIdentityType(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of _id
+	 * @return value of UserIdentityType
 	 */
-	public final java.lang.String get_id(com.mendix.systemwideinterfaces.core.IContext context)
+	public final microsoftgraph.proxies.ENUM_TeamworkUserIdentityType getUserIdentityType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames._id.toString());
+		Object obj = getMendixObject().getValue(context, MemberNames.UserIdentityType.toString());
+		if (obj == null) {
+			return null;
+		}
+		return microsoftgraph.proxies.ENUM_TeamworkUserIdentityType.valueOf((java.lang.String) obj);
 	}
 
 	/**
-	 * Set value of _id
-	 * @param _id
+	 * Set value of UserIdentityType
+	 * @param useridentitytype
 	 */
-	public final void set_id(java.lang.String _id)
+	public final void setUserIdentityType(microsoftgraph.proxies.ENUM_TeamworkUserIdentityType useridentitytype)
 	{
-		set_id(getContext(), _id);
+		setUserIdentityType(getContext(), useridentitytype);
 	}
 
 	/**
-	 * Set value of _id
+	 * Set value of UserIdentityType
 	 * @param context
-	 * @param _id
+	 * @param useridentitytype
 	 */
-	public final void set_id(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _id)
+	public final void setUserIdentityType(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_TeamworkUserIdentityType useridentitytype)
 	{
-		getMendixObject().setValue(context, MemberNames._id.toString(), _id);
+		if (useridentitytype != null) {
+			getMendixObject().setValue(context, MemberNames.UserIdentityType.toString(), useridentitytype.toString());
+		} else {
+			getMendixObject().setValue(context, MemberNames.UserIdentityType.toString(), null);
+		}
 	}
 
 	/**
+	 * @return value of AboutMe
+	 */
+	public final java.lang.String getAboutMe()
+	{
+		return getAboutMe(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of AboutMe
+	 */
+	public final java.lang.String getAboutMe(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.AboutMe.toString());
+	}
+
+	/**
+	 * Set value of AboutMe
+	 * @param aboutme
+	 */
+	public final void setAboutMe(java.lang.String aboutme)
+	{
+		setAboutMe(getContext(), aboutme);
+	}
+
+	/**
+	 * Set value of AboutMe
+	 * @param context
+	 * @param aboutme
+	 */
+	public final void setAboutMe(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String aboutme)
+	{
+		getMendixObject().setValue(context, MemberNames.AboutMe.toString(), aboutme);
+	}
+
+	/**
+	 * @return value of AccountEnabled
+	 */
+	public final java.lang.Boolean getAccountEnabled()
+	{
+		return getAccountEnabled(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of AccountEnabled
+	 */
+	public final java.lang.Boolean getAccountEnabled(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.AccountEnabled.toString());
+	}
+
+	/**
+	 * Set value of AccountEnabled
+	 * @param accountenabled
+	 */
+	public final void setAccountEnabled(java.lang.Boolean accountenabled)
+	{
+		setAccountEnabled(getContext(), accountenabled);
+	}
+
+	/**
+	 * Set value of AccountEnabled
+	 * @param context
+	 * @param accountenabled
+	 */
+	public final void setAccountEnabled(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean accountenabled)
+	{
+		getMendixObject().setValue(context, MemberNames.AccountEnabled.toString(), accountenabled);
+	}
+
+	/**
+	 * @return value of AgeGroup
+	 */
+	public final java.lang.String getAgeGroup()
+	{
+		return getAgeGroup(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of AgeGroup
+	 */
+	public final java.lang.String getAgeGroup(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.AgeGroup.toString());
+	}
+
+	/**
+	 * Set value of AgeGroup
+	 * @param agegroup
+	 */
+	public final void setAgeGroup(java.lang.String agegroup)
+	{
+		setAgeGroup(getContext(), agegroup);
+	}
+
+	/**
+	 * Set value of AgeGroup
+	 * @param context
+	 * @param agegroup
+	 */
+	public final void setAgeGroup(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String agegroup)
+	{
+		getMendixObject().setValue(context, MemberNames.AgeGroup.toString(), agegroup);
+	}
+
+	/**
+	 * @return value of Birthday
+	 */
+	public final java.util.Date getBirthday()
+	{
+		return getBirthday(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Birthday
+	 */
+	public final java.util.Date getBirthday(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.util.Date) getMendixObject().getValue(context, MemberNames.Birthday.toString());
+	}
+
+	/**
+	 * Set value of Birthday
+	 * @param birthday
+	 */
+	public final void setBirthday(java.util.Date birthday)
+	{
+		setBirthday(getContext(), birthday);
+	}
+
+	/**
+	 * Set value of Birthday
+	 * @param context
+	 * @param birthday
+	 */
+	public final void setBirthday(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date birthday)
+	{
+		getMendixObject().setValue(context, MemberNames.Birthday.toString(), birthday);
+	}
+
+	/**
+	 * @return value of CompanyName
+	 */
+	public final java.lang.String getCompanyName()
+	{
+		return getCompanyName(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of CompanyName
+	 */
+	public final java.lang.String getCompanyName(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.CompanyName.toString());
+	}
+
+	/**
+	 * Set value of CompanyName
+	 * @param companyname
+	 */
+	public final void setCompanyName(java.lang.String companyname)
+	{
+		setCompanyName(getContext(), companyname);
+	}
+
+	/**
+	 * Set value of CompanyName
+	 * @param context
+	 * @param companyname
+	 */
+	public final void setCompanyName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String companyname)
+	{
+		getMendixObject().setValue(context, MemberNames.CompanyName.toString(), companyname);
+	}
+
+	/**
+	 * @return value of EmployeeId
+	 */
+	public final java.lang.String getEmployeeId()
+	{
+		return getEmployeeId(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of EmployeeId
+	 */
+	public final java.lang.String getEmployeeId(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.EmployeeId.toString());
+	}
+
+	/**
+	 * Set value of EmployeeId
+	 * @param employeeid
+	 */
+	public final void setEmployeeId(java.lang.String employeeid)
+	{
+		setEmployeeId(getContext(), employeeid);
+	}
+
+	/**
+	 * Set value of EmployeeId
+	 * @param context
+	 * @param employeeid
+	 */
+	public final void setEmployeeId(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String employeeid)
+	{
+		getMendixObject().setValue(context, MemberNames.EmployeeId.toString(), employeeid);
+	}
+
+	/**
+	 * @return value of UserType
+	 */
+	public final java.lang.String getUserType()
+	{
+		return getUserType(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of UserType
+	 */
+	public final java.lang.String getUserType(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.UserType.toString());
+	}
+
+	/**
+	 * Set value of UserType
+	 * @param usertype
+	 */
+	public final void setUserType(java.lang.String usertype)
+	{
+		setUserType(getContext(), usertype);
+	}
+
+	/**
+	 * Set value of UserType
+	 * @param context
+	 * @param usertype
+	 */
+	public final void setUserType(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String usertype)
+	{
+		getMendixObject().setValue(context, MemberNames.UserType.toString(), usertype);
+	}
+
+	/**
+	 * @return value of MailNickname
+	 */
+	public final java.lang.String getMailNickname()
+	{
+		return getMailNickname(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of MailNickname
+	 */
+	public final java.lang.String getMailNickname(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.MailNickname.toString());
+	}
+
+	/**
+	 * Set value of MailNickname
+	 * @param mailnickname
+	 */
+	public final void setMailNickname(java.lang.String mailnickname)
+	{
+		setMailNickname(getContext(), mailnickname);
+	}
+
+	/**
+	 * Set value of MailNickname
+	 * @param context
+	 * @param mailnickname
+	 */
+	public final void setMailNickname(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String mailnickname)
+	{
+		getMendixObject().setValue(context, MemberNames.MailNickname.toString(), mailnickname);
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of BusinessPhones_User
 	 */
 	public final microsoftgraph.proxies.BusinessPhones getBusinessPhones_User() throws com.mendix.core.CoreException
@@ -566,13 +850,15 @@ public class User
 	/**
 	 * @param context
 	 * @return value of BusinessPhones_User
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.BusinessPhones getBusinessPhones_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.BusinessPhones result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.BusinessPhones_User.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.BusinessPhones.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -592,77 +878,348 @@ public class User
 	 */
 	public final void setBusinessPhones_User(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.BusinessPhones businessphones_user)
 	{
-		if (businessphones_user == null)
+		if (businessphones_user == null) {
 			getMendixObject().setValue(context, MemberNames.BusinessPhones_User.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.BusinessPhones_User.toString(), businessphones_user.getMendixObject().getId());
+		}
 	}
 
 	/**
-	 * @return value of User_Request
+	 * @throws com.mendix.core.CoreException
+	 * @return value of User_IdentitySet
 	 */
-	public final microsoftgraph.proxies.Request getUser_Request() throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.IdentitySet getUser_IdentitySet() throws com.mendix.core.CoreException
 	{
-		return getUser_Request(getContext());
+		return getUser_IdentitySet(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of User_Request
+	 * @return value of User_IdentitySet
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final microsoftgraph.proxies.Request getUser_Request(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.IdentitySet getUser_IdentitySet(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		microsoftgraph.proxies.Request result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.User_Request.toString());
-		if (identifier != null)
-			result = microsoftgraph.proxies.Request.load(context, identifier);
+		microsoftgraph.proxies.IdentitySet result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.User_IdentitySet.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.IdentitySet.load(context, identifier);
+		}
 		return result;
 	}
 
 	/**
-	 * Set value of User_Request
-	 * @param user_request
+	 * Set value of User_IdentitySet
+	 * @param user_identityset
 	 */
-	public final void setUser_Request(microsoftgraph.proxies.Request user_request)
+	public final void setUser_IdentitySet(microsoftgraph.proxies.IdentitySet user_identityset)
 	{
-		setUser_Request(getContext(), user_request);
+		setUser_IdentitySet(getContext(), user_identityset);
 	}
 
 	/**
-	 * Set value of User_Request
+	 * Set value of User_IdentitySet
 	 * @param context
-	 * @param user_request
+	 * @param user_identityset
 	 */
-	public final void setUser_Request(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Request user_request)
+	public final void setUser_IdentitySet(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.IdentitySet user_identityset)
 	{
-		if (user_request == null)
-			getMendixObject().setValue(context, MemberNames.User_Request.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.User_Request.toString(), user_request.getMendixObject().getId());
+		if (user_identityset == null) {
+			getMendixObject().setValue(context, MemberNames.User_IdentitySet.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.User_IdentitySet.toString(), user_identityset.getMendixObject().getId());
+		}
 	}
 
 	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
+	 * @throws com.mendix.core.CoreException
+	 * @return value of User_Value
 	 */
-	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
+	public final microsoftgraph.proxies.Value getUser_Value() throws com.mendix.core.CoreException
 	{
-		return userMendixObject;
+		return getUser_Value(getContext());
 	}
 
 	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
+	 * @param context
+	 * @return value of User_Value
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final com.mendix.systemwideinterfaces.core.IContext getContext()
+	public final microsoftgraph.proxies.Value getUser_Value(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		return context;
+		microsoftgraph.proxies.Value result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.User_Value.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Value.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of User_Value
+	 * @param user_value
+	 */
+	public final void setUser_Value(microsoftgraph.proxies.Value user_value)
+	{
+		setUser_Value(getContext(), user_value);
+	}
+
+	/**
+	 * Set value of User_Value
+	 * @param context
+	 * @param user_value
+	 */
+	public final void setUser_Value(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Value user_value)
+	{
+		if (user_value == null) {
+			getMendixObject().setValue(context, MemberNames.User_Value.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.User_Value.toString(), user_value.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of DirectReports
+	 */
+	public final microsoftgraph.proxies.User getDirectReports() throws com.mendix.core.CoreException
+	{
+		return getDirectReports(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DirectReports
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.User getDirectReports(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.User result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.DirectReports.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.User.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of DirectReports
+	 * @param directreports
+	 */
+	public final void setDirectReports(microsoftgraph.proxies.User directreports)
+	{
+		setDirectReports(getContext(), directreports);
+	}
+
+	/**
+	 * Set value of DirectReports
+	 * @param context
+	 * @param directreports
+	 */
+	public final void setDirectReports(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.User directreports)
+	{
+		if (directreports == null) {
+			getMendixObject().setValue(context, MemberNames.DirectReports.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.DirectReports.toString(), directreports.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of PasswordProfile_User
+	 */
+	public final microsoftgraph.proxies.PasswordProfile getPasswordProfile_User() throws com.mendix.core.CoreException
+	{
+		return getPasswordProfile_User(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of PasswordProfile_User
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.PasswordProfile getPasswordProfile_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.PasswordProfile result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.PasswordProfile_User.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.PasswordProfile.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of PasswordProfile_User
+	 * @param passwordprofile_user
+	 */
+	public final void setPasswordProfile_User(microsoftgraph.proxies.PasswordProfile passwordprofile_user)
+	{
+		setPasswordProfile_User(getContext(), passwordprofile_user);
+	}
+
+	/**
+	 * Set value of PasswordProfile_User
+	 * @param context
+	 * @param passwordprofile_user
+	 */
+	public final void setPasswordProfile_User(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.PasswordProfile passwordprofile_user)
+	{
+		if (passwordprofile_user == null) {
+			getMendixObject().setValue(context, MemberNames.PasswordProfile_User.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.PasswordProfile_User.toString(), passwordprofile_user.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of Owners
+	 */
+	public final microsoftgraph.proxies.Group getOwners() throws com.mendix.core.CoreException
+	{
+		return getOwners(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Owners
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.Group getOwners(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.Group result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Owners.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Group.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of Owners
+	 * @param owners
+	 */
+	public final void setOwners(microsoftgraph.proxies.Group owners)
+	{
+		setOwners(getContext(), owners);
+	}
+
+	/**
+	 * Set value of Owners
+	 * @param context
+	 * @param owners
+	 */
+	public final void setOwners(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Group owners)
+	{
+		if (owners == null) {
+			getMendixObject().setValue(context, MemberNames.Owners.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.Owners.toString(), owners.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of User_ProfilePhoto
+	 */
+	public final microsoftgraph.proxies.ProfilePhoto getUser_ProfilePhoto() throws com.mendix.core.CoreException
+	{
+		return getUser_ProfilePhoto(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of User_ProfilePhoto
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.ProfilePhoto getUser_ProfilePhoto(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.ProfilePhoto result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.User_ProfilePhoto.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.ProfilePhoto.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of User_ProfilePhoto
+	 * @param user_profilephoto
+	 */
+	public final void setUser_ProfilePhoto(microsoftgraph.proxies.ProfilePhoto user_profilephoto)
+	{
+		setUser_ProfilePhoto(getContext(), user_profilephoto);
+	}
+
+	/**
+	 * Set value of User_ProfilePhoto
+	 * @param context
+	 * @param user_profilephoto
+	 */
+	public final void setUser_ProfilePhoto(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ProfilePhoto user_profilephoto)
+	{
+		if (user_profilephoto == null) {
+			getMendixObject().setValue(context, MemberNames.User_ProfilePhoto.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.User_ProfilePhoto.toString(), user_profilephoto.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of MicrosoftUser
+	 */
+	public final system.proxies.User getMicrosoftUser() throws com.mendix.core.CoreException
+	{
+		return getMicrosoftUser(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of MicrosoftUser
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final system.proxies.User getMicrosoftUser(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		system.proxies.User result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.MicrosoftUser.toString());
+		if (identifier != null) {
+			result = system.proxies.User.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of MicrosoftUser
+	 * @param microsoftuser
+	 */
+	public final void setMicrosoftUser(system.proxies.User microsoftuser)
+	{
+		setMicrosoftUser(getContext(), microsoftuser);
+	}
+
+	/**
+	 * Set value of MicrosoftUser
+	 * @param context
+	 * @param microsoftuser
+	 */
+	public final void setMicrosoftUser(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.User microsoftuser)
+	{
+		if (microsoftuser == null) {
+			getMendixObject().setValue(context, MemberNames.MicrosoftUser.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.MicrosoftUser.toString(), microsoftuser.getMendixObject().getId());
+		}
 	}
 
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.User that = (microsoftgraph.proxies.User) obj;
@@ -682,13 +1239,14 @@ public class User
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.User";
+		return entityName;
 	}
 
 	/**
 	 * @return String GUID from this object, format: ID_0000000000
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
+	@java.lang.Override
 	@java.lang.Deprecated
 	public java.lang.String getGUID()
 	{

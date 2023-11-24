@@ -6,30 +6,29 @@ package microsoftgraph.proxies;
 
 public enum ENUM_Authorization_Endpoint_Error
 {
-	invalid_request(new java.lang.String[][] { new java.lang.String[] { "en_US", "invalid_request" } }),
-	unauthorized_client(new java.lang.String[][] { new java.lang.String[] { "en_US", "unauthorized_client" } }),
-	access_denied(new java.lang.String[][] { new java.lang.String[] { "en_US", "access_denied" } }),
-	unsupported_response_type(new java.lang.String[][] { new java.lang.String[] { "en_US", "unsupported_response_type" } }),
-	server_error(new java.lang.String[][] { new java.lang.String[] { "en_US", "server_error" } }),
-	temporarily_unavailable(new java.lang.String[][] { new java.lang.String[] { "en_US", "temporarily_unavailable" } }),
-	invalid_resource(new java.lang.String[][] { new java.lang.String[] { "en_US", "invalid_resource" } }),
-	login_required(new java.lang.String[][] { new java.lang.String[] { "en_US", "login_required" } }),
-	interaction_required(new java.lang.String[][] { new java.lang.String[] { "en_US", "interaction_required" } });
+	invalid_request(new java.lang.String[][] { new java.lang.String[] { "en_US", "invalid_request" }, new java.lang.String[] { "nl_NL", "invalid_request" } }),
+	unauthorized_client(new java.lang.String[][] { new java.lang.String[] { "en_US", "unauthorized_client" }, new java.lang.String[] { "nl_NL", "unauthorized_client" } }),
+	access_denied(new java.lang.String[][] { new java.lang.String[] { "en_US", "access_denied" }, new java.lang.String[] { "nl_NL", "access_denied" } }),
+	unsupported_response_type(new java.lang.String[][] { new java.lang.String[] { "en_US", "unsupported_response_type" }, new java.lang.String[] { "nl_NL", "unsupported_response_type" } }),
+	server_error(new java.lang.String[][] { new java.lang.String[] { "en_US", "server_error" }, new java.lang.String[] { "nl_NL", "server_error" } }),
+	temporarily_unavailable(new java.lang.String[][] { new java.lang.String[] { "en_US", "temporarily_unavailable" }, new java.lang.String[] { "nl_NL", "temporarily_unavailable" } }),
+	invalid_resource(new java.lang.String[][] { new java.lang.String[] { "en_US", "invalid_resource" }, new java.lang.String[] { "nl_NL", "invalid_resource" } }),
+	login_required(new java.lang.String[][] { new java.lang.String[] { "en_US", "login_required" }, new java.lang.String[] { "nl_NL", "login_required" } }),
+	interaction_required(new java.lang.String[][] { new java.lang.String[] { "en_US", "interaction_required" }, new java.lang.String[] { "nl_NL", "interaction_required" } });
 
-	private java.util.Map<java.lang.String, java.lang.String> captions;
+	private final java.util.Map<java.lang.String, java.lang.String> captions;
 
 	private ENUM_Authorization_Endpoint_Error(java.lang.String[][] captionStrings)
 	{
-		this.captions = new java.util.HashMap<java.lang.String, java.lang.String>();
-		for (java.lang.String[] captionString : captionStrings)
+		this.captions = new java.util.HashMap<>();
+		for (java.lang.String[] captionString : captionStrings) {
 			captions.put(captionString[0], captionString[1]);
+		}
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		if (captions.containsKey(languageCode))
-			return captions.get(languageCode);
-		return captions.get("en_US");
+		return captions.getOrDefault(languageCode, "en_US");
 	}
 
 	public java.lang.String getCaption()

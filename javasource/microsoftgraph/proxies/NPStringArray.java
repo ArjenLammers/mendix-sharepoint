@@ -17,15 +17,17 @@ public class NPStringArray
 
 	public NPStringArray(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.NPStringArray"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected NPStringArray(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject nPStringArrayMendixObject)
 	{
-		if (nPStringArrayMendixObject == null)
+		if (nPStringArrayMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.NPStringArray", nPStringArrayMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.NPStringArray");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, nPStringArrayMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.nPStringArrayMendixObject = nPStringArrayMendixObject;
 		this.context = context;
@@ -43,24 +45,33 @@ public class NPStringArray
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.NPStringArray initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.BusinessPhones", mendixObject.getType()))
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.BusinessPhones", mendixObject.getType())) {
 			return microsoftgraph.proxies.BusinessPhones.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Categories", mendixObject.getType()))
-			return microsoftgraph.proxies.Categories.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.DaysOfWeek", mendixObject.getType()))
-			return microsoftgraph.proxies.DaysOfWeek.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.GroupTypes", mendixObject.getType()))
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.DependsOn", mendixObject.getType())) {
+			return microsoftgraph.proxies.DependsOn.initialize(context, mendixObject);
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.GroupTypes", mendixObject.getType())) {
 			return microsoftgraph.proxies.GroupTypes.initialize(context, mendixObject);
-
-		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.SearchTerms", mendixObject.getType()))
-			return microsoftgraph.proxies.SearchTerms.initialize(context, mendixObject);
-
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ProxyAddresses", mendixObject.getType())) {
+			return microsoftgraph.proxies.ProxyAddresses.initialize(context, mendixObject);
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ResourceBehaviorOptions", mendixObject.getType())) {
+			return microsoftgraph.proxies.ResourceBehaviorOptions.initialize(context, mendixObject);
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ResourceProvisioningOptions", mendixObject.getType())) {
+			return microsoftgraph.proxies.ResourceProvisioningOptions.initialize(context, mendixObject);
+		}
+		if (com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ValidationTokens", mendixObject.getType())) {
+			return microsoftgraph.proxies.ValidationTokens.initialize(context, mendixObject);
+		}
 		return new microsoftgraph.proxies.NPStringArray(context, mendixObject);
 	}
 
@@ -72,6 +83,7 @@ public class NPStringArray
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -80,6 +92,7 @@ public class NPStringArray
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -120,9 +133,9 @@ public class NPStringArray
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.NPStringArray that = (microsoftgraph.proxies.NPStringArray) obj;
@@ -142,7 +155,7 @@ public class NPStringArray
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.NPStringArray";
+		return entityName;
 	}
 
 	/**

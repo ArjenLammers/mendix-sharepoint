@@ -4,12 +4,11 @@
 
 package microsoftgraph.proxies;
 
-public class Group
+/**
+ * Microsoft 365 groups provide the foundational membership service for users to share conversations, files, notes, calendars, plans, and many other assets.
+ */
+public class Group extends microsoftgraph.proxies.DirectoryObject
 {
-	private final com.mendix.systemwideinterfaces.core.IMendixObject groupMendixObject;
-
-	private final com.mendix.systemwideinterfaces.core.IContext context;
-
 	/**
 	 * Internal name of this entity
 	 */
@@ -30,11 +29,30 @@ public class Group
 		SecurityEnabled("SecurityEnabled"),
 		SecurityIdentifier("SecurityIdentifier"),
 		Visibility("Visibility"),
-		_id("_id"),
+		AllowExternalSenders("AllowExternalSenders"),
+		AutoSubscribeNewMembers("AutoSubscribeNewMembers"),
+		HideFromOutlookClients("HideFromOutlookClients"),
+		MembershipRule("MembershipRule"),
+		MembershipRuleProcessingState("MembershipRuleProcessingState"),
+		Theme("Theme"),
+		ExpirationDateTime("ExpirationDateTime"),
+		PreferredLanguage("PreferredLanguage"),
+		_odata_context("_odata_context"),
+		_Id("_Id"),
+		DeletedDateTime("DeletedDateTime"),
 		GroupTypes_Group("MicrosoftGraph.GroupTypes_Group"),
-		Group_Request("MicrosoftGraph.Group_Request");
+		Group_Value("MicrosoftGraph.Group_Value"),
+		MemberOf("MicrosoftGraph.MemberOf"),
+		ProxyAddresses_Group("MicrosoftGraph.ProxyAddresses_Group"),
+		ResourceBehaviorOptions_Group("MicrosoftGraph.ResourceBehaviorOptions_Group"),
+		ResourceProvisioningOptions_Group("MicrosoftGraph.ResourceProvisioningOptions_Group"),
+		OwnedObjects("MicrosoftGraph.OwnedObjects"),
+		CreatedObjects("MicrosoftGraph.CreatedObjects"),
+		TransitiveMemberOf("MicrosoftGraph.TransitiveMemberOf"),
+		DirectoryObject_Value("MicrosoftGraph.DirectoryObject_Value"),
+		Members("MicrosoftGraph.Members");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -50,18 +68,15 @@ public class Group
 
 	public Group(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Group"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Group(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject groupMendixObject)
 	{
-		if (groupMendixObject == null)
-			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Group", groupMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Group");
-
-		this.groupMendixObject = groupMendixObject;
-		this.context = context;
+		super(context, groupMendixObject);
+		if (!com.mendix.core.Core.isSubClassOf(entityName, groupMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 	}
 
 	/**
@@ -76,6 +91,9 @@ public class Group
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Group initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -88,37 +106,6 @@ public class Group
 		return microsoftgraph.proxies.Group.initialize(context, mendixObject);
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of CreatedDateTime
 	 */
@@ -480,42 +467,331 @@ public class Group
 	}
 
 	/**
-	 * @return value of _id
+	 * @return value of AllowExternalSenders
 	 */
-	public final java.lang.String get_id()
+	public final java.lang.Boolean getAllowExternalSenders()
 	{
-		return get_id(getContext());
+		return getAllowExternalSenders(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of _id
+	 * @return value of AllowExternalSenders
 	 */
-	public final java.lang.String get_id(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Boolean getAllowExternalSenders(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames._id.toString());
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.AllowExternalSenders.toString());
 	}
 
 	/**
-	 * Set value of _id
-	 * @param _id
+	 * Set value of AllowExternalSenders
+	 * @param allowexternalsenders
 	 */
-	public final void set_id(java.lang.String _id)
+	public final void setAllowExternalSenders(java.lang.Boolean allowexternalsenders)
 	{
-		set_id(getContext(), _id);
+		setAllowExternalSenders(getContext(), allowexternalsenders);
 	}
 
 	/**
-	 * Set value of _id
+	 * Set value of AllowExternalSenders
 	 * @param context
-	 * @param _id
+	 * @param allowexternalsenders
 	 */
-	public final void set_id(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _id)
+	public final void setAllowExternalSenders(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean allowexternalsenders)
 	{
-		getMendixObject().setValue(context, MemberNames._id.toString(), _id);
+		getMendixObject().setValue(context, MemberNames.AllowExternalSenders.toString(), allowexternalsenders);
 	}
 
 	/**
+	 * @return value of AutoSubscribeNewMembers
+	 */
+	public final java.lang.Boolean getAutoSubscribeNewMembers()
+	{
+		return getAutoSubscribeNewMembers(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of AutoSubscribeNewMembers
+	 */
+	public final java.lang.Boolean getAutoSubscribeNewMembers(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.AutoSubscribeNewMembers.toString());
+	}
+
+	/**
+	 * Set value of AutoSubscribeNewMembers
+	 * @param autosubscribenewmembers
+	 */
+	public final void setAutoSubscribeNewMembers(java.lang.Boolean autosubscribenewmembers)
+	{
+		setAutoSubscribeNewMembers(getContext(), autosubscribenewmembers);
+	}
+
+	/**
+	 * Set value of AutoSubscribeNewMembers
+	 * @param context
+	 * @param autosubscribenewmembers
+	 */
+	public final void setAutoSubscribeNewMembers(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean autosubscribenewmembers)
+	{
+		getMendixObject().setValue(context, MemberNames.AutoSubscribeNewMembers.toString(), autosubscribenewmembers);
+	}
+
+	/**
+	 * @return value of HideFromOutlookClients
+	 */
+	public final java.lang.Boolean getHideFromOutlookClients()
+	{
+		return getHideFromOutlookClients(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of HideFromOutlookClients
+	 */
+	public final java.lang.Boolean getHideFromOutlookClients(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.HideFromOutlookClients.toString());
+	}
+
+	/**
+	 * Set value of HideFromOutlookClients
+	 * @param hidefromoutlookclients
+	 */
+	public final void setHideFromOutlookClients(java.lang.Boolean hidefromoutlookclients)
+	{
+		setHideFromOutlookClients(getContext(), hidefromoutlookclients);
+	}
+
+	/**
+	 * Set value of HideFromOutlookClients
+	 * @param context
+	 * @param hidefromoutlookclients
+	 */
+	public final void setHideFromOutlookClients(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean hidefromoutlookclients)
+	{
+		getMendixObject().setValue(context, MemberNames.HideFromOutlookClients.toString(), hidefromoutlookclients);
+	}
+
+	/**
+	 * @return value of MembershipRule
+	 */
+	public final java.lang.String getMembershipRule()
+	{
+		return getMembershipRule(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of MembershipRule
+	 */
+	public final java.lang.String getMembershipRule(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.MembershipRule.toString());
+	}
+
+	/**
+	 * Set value of MembershipRule
+	 * @param membershiprule
+	 */
+	public final void setMembershipRule(java.lang.String membershiprule)
+	{
+		setMembershipRule(getContext(), membershiprule);
+	}
+
+	/**
+	 * Set value of MembershipRule
+	 * @param context
+	 * @param membershiprule
+	 */
+	public final void setMembershipRule(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String membershiprule)
+	{
+		getMendixObject().setValue(context, MemberNames.MembershipRule.toString(), membershiprule);
+	}
+
+	/**
+	 * @return value of MembershipRuleProcessingState
+	 */
+	public final java.lang.String getMembershipRuleProcessingState()
+	{
+		return getMembershipRuleProcessingState(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of MembershipRuleProcessingState
+	 */
+	public final java.lang.String getMembershipRuleProcessingState(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.MembershipRuleProcessingState.toString());
+	}
+
+	/**
+	 * Set value of MembershipRuleProcessingState
+	 * @param membershipruleprocessingstate
+	 */
+	public final void setMembershipRuleProcessingState(java.lang.String membershipruleprocessingstate)
+	{
+		setMembershipRuleProcessingState(getContext(), membershipruleprocessingstate);
+	}
+
+	/**
+	 * Set value of MembershipRuleProcessingState
+	 * @param context
+	 * @param membershipruleprocessingstate
+	 */
+	public final void setMembershipRuleProcessingState(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String membershipruleprocessingstate)
+	{
+		getMendixObject().setValue(context, MemberNames.MembershipRuleProcessingState.toString(), membershipruleprocessingstate);
+	}
+
+	/**
+	 * @return value of Theme
+	 */
+	public final java.lang.String getTheme()
+	{
+		return getTheme(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Theme
+	 */
+	public final java.lang.String getTheme(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Theme.toString());
+	}
+
+	/**
+	 * Set value of Theme
+	 * @param theme
+	 */
+	public final void setTheme(java.lang.String theme)
+	{
+		setTheme(getContext(), theme);
+	}
+
+	/**
+	 * Set value of Theme
+	 * @param context
+	 * @param theme
+	 */
+	public final void setTheme(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String theme)
+	{
+		getMendixObject().setValue(context, MemberNames.Theme.toString(), theme);
+	}
+
+	/**
+	 * @return value of ExpirationDateTime
+	 */
+	public final java.util.Date getExpirationDateTime()
+	{
+		return getExpirationDateTime(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ExpirationDateTime
+	 */
+	public final java.util.Date getExpirationDateTime(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.util.Date) getMendixObject().getValue(context, MemberNames.ExpirationDateTime.toString());
+	}
+
+	/**
+	 * Set value of ExpirationDateTime
+	 * @param expirationdatetime
+	 */
+	public final void setExpirationDateTime(java.util.Date expirationdatetime)
+	{
+		setExpirationDateTime(getContext(), expirationdatetime);
+	}
+
+	/**
+	 * Set value of ExpirationDateTime
+	 * @param context
+	 * @param expirationdatetime
+	 */
+	public final void setExpirationDateTime(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date expirationdatetime)
+	{
+		getMendixObject().setValue(context, MemberNames.ExpirationDateTime.toString(), expirationdatetime);
+	}
+
+	/**
+	 * @return value of PreferredLanguage
+	 */
+	public final java.lang.String getPreferredLanguage()
+	{
+		return getPreferredLanguage(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of PreferredLanguage
+	 */
+	public final java.lang.String getPreferredLanguage(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.PreferredLanguage.toString());
+	}
+
+	/**
+	 * Set value of PreferredLanguage
+	 * @param preferredlanguage
+	 */
+	public final void setPreferredLanguage(java.lang.String preferredlanguage)
+	{
+		setPreferredLanguage(getContext(), preferredlanguage);
+	}
+
+	/**
+	 * Set value of PreferredLanguage
+	 * @param context
+	 * @param preferredlanguage
+	 */
+	public final void setPreferredLanguage(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String preferredlanguage)
+	{
+		getMendixObject().setValue(context, MemberNames.PreferredLanguage.toString(), preferredlanguage);
+	}
+
+	/**
+	 * @return value of _odata_context
+	 */
+	public final java.lang.String get_odata_context()
+	{
+		return get_odata_context(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of _odata_context
+	 */
+	public final java.lang.String get_odata_context(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames._odata_context.toString());
+	}
+
+	/**
+	 * Set value of _odata_context
+	 * @param _odata_context
+	 */
+	public final void set_odata_context(java.lang.String _odata_context)
+	{
+		set_odata_context(getContext(), _odata_context);
+	}
+
+	/**
+	 * Set value of _odata_context
+	 * @param context
+	 * @param _odata_context
+	 */
+	public final void set_odata_context(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _odata_context)
+	{
+		getMendixObject().setValue(context, MemberNames._odata_context.toString(), _odata_context);
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of GroupTypes_Group
 	 */
 	public final microsoftgraph.proxies.GroupTypes getGroupTypes_Group() throws com.mendix.core.CoreException
@@ -526,13 +802,15 @@ public class Group
 	/**
 	 * @param context
 	 * @return value of GroupTypes_Group
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.GroupTypes getGroupTypes_Group(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.GroupTypes result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.GroupTypes_Group.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.GroupTypes.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -552,77 +830,254 @@ public class Group
 	 */
 	public final void setGroupTypes_Group(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.GroupTypes grouptypes_group)
 	{
-		if (grouptypes_group == null)
+		if (grouptypes_group == null) {
 			getMendixObject().setValue(context, MemberNames.GroupTypes_Group.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.GroupTypes_Group.toString(), grouptypes_group.getMendixObject().getId());
+		}
 	}
 
 	/**
-	 * @return value of Group_Request
+	 * @throws com.mendix.core.CoreException
+	 * @return value of Group_Value
 	 */
-	public final microsoftgraph.proxies.Request getGroup_Request() throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.Value getGroup_Value() throws com.mendix.core.CoreException
 	{
-		return getGroup_Request(getContext());
+		return getGroup_Value(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Group_Request
+	 * @return value of Group_Value
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final microsoftgraph.proxies.Request getGroup_Request(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.Value getGroup_Value(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		microsoftgraph.proxies.Request result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Group_Request.toString());
-		if (identifier != null)
-			result = microsoftgraph.proxies.Request.load(context, identifier);
+		microsoftgraph.proxies.Value result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Group_Value.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Value.load(context, identifier);
+		}
 		return result;
 	}
 
 	/**
-	 * Set value of Group_Request
-	 * @param group_request
+	 * Set value of Group_Value
+	 * @param group_value
 	 */
-	public final void setGroup_Request(microsoftgraph.proxies.Request group_request)
+	public final void setGroup_Value(microsoftgraph.proxies.Value group_value)
 	{
-		setGroup_Request(getContext(), group_request);
+		setGroup_Value(getContext(), group_value);
 	}
 
 	/**
-	 * Set value of Group_Request
+	 * Set value of Group_Value
 	 * @param context
-	 * @param group_request
+	 * @param group_value
 	 */
-	public final void setGroup_Request(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Request group_request)
+	public final void setGroup_Value(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Value group_value)
 	{
-		if (group_request == null)
-			getMendixObject().setValue(context, MemberNames.Group_Request.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.Group_Request.toString(), group_request.getMendixObject().getId());
+		if (group_value == null) {
+			getMendixObject().setValue(context, MemberNames.Group_Value.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.Group_Value.toString(), group_value.getMendixObject().getId());
+		}
 	}
 
 	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
+	 * @throws com.mendix.core.CoreException
+	 * @return value of MemberOf
 	 */
-	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
+	public final microsoftgraph.proxies.Group getMemberOf() throws com.mendix.core.CoreException
 	{
-		return groupMendixObject;
+		return getMemberOf(getContext());
 	}
 
 	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
+	 * @param context
+	 * @return value of MemberOf
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final com.mendix.systemwideinterfaces.core.IContext getContext()
+	public final microsoftgraph.proxies.Group getMemberOf(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		return context;
+		microsoftgraph.proxies.Group result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.MemberOf.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Group.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of MemberOf
+	 * @param memberof
+	 */
+	public final void setMemberOf(microsoftgraph.proxies.Group memberof)
+	{
+		setMemberOf(getContext(), memberof);
+	}
+
+	/**
+	 * Set value of MemberOf
+	 * @param context
+	 * @param memberof
+	 */
+	public final void setMemberOf(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Group memberof)
+	{
+		if (memberof == null) {
+			getMendixObject().setValue(context, MemberNames.MemberOf.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.MemberOf.toString(), memberof.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of ProxyAddresses_Group
+	 */
+	public final microsoftgraph.proxies.ProxyAddresses getProxyAddresses_Group() throws com.mendix.core.CoreException
+	{
+		return getProxyAddresses_Group(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ProxyAddresses_Group
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.ProxyAddresses getProxyAddresses_Group(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.ProxyAddresses result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ProxyAddresses_Group.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.ProxyAddresses.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of ProxyAddresses_Group
+	 * @param proxyaddresses_group
+	 */
+	public final void setProxyAddresses_Group(microsoftgraph.proxies.ProxyAddresses proxyaddresses_group)
+	{
+		setProxyAddresses_Group(getContext(), proxyaddresses_group);
+	}
+
+	/**
+	 * Set value of ProxyAddresses_Group
+	 * @param context
+	 * @param proxyaddresses_group
+	 */
+	public final void setProxyAddresses_Group(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ProxyAddresses proxyaddresses_group)
+	{
+		if (proxyaddresses_group == null) {
+			getMendixObject().setValue(context, MemberNames.ProxyAddresses_Group.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.ProxyAddresses_Group.toString(), proxyaddresses_group.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of ResourceBehaviorOptions_Group
+	 */
+	public final microsoftgraph.proxies.ResourceBehaviorOptions getResourceBehaviorOptions_Group() throws com.mendix.core.CoreException
+	{
+		return getResourceBehaviorOptions_Group(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ResourceBehaviorOptions_Group
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.ResourceBehaviorOptions getResourceBehaviorOptions_Group(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.ResourceBehaviorOptions result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ResourceBehaviorOptions_Group.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.ResourceBehaviorOptions.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of ResourceBehaviorOptions_Group
+	 * @param resourcebehavioroptions_group
+	 */
+	public final void setResourceBehaviorOptions_Group(microsoftgraph.proxies.ResourceBehaviorOptions resourcebehavioroptions_group)
+	{
+		setResourceBehaviorOptions_Group(getContext(), resourcebehavioroptions_group);
+	}
+
+	/**
+	 * Set value of ResourceBehaviorOptions_Group
+	 * @param context
+	 * @param resourcebehavioroptions_group
+	 */
+	public final void setResourceBehaviorOptions_Group(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ResourceBehaviorOptions resourcebehavioroptions_group)
+	{
+		if (resourcebehavioroptions_group == null) {
+			getMendixObject().setValue(context, MemberNames.ResourceBehaviorOptions_Group.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.ResourceBehaviorOptions_Group.toString(), resourcebehavioroptions_group.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of ResourceProvisioningOptions_Group
+	 */
+	public final microsoftgraph.proxies.ResourceProvisioningOptions getResourceProvisioningOptions_Group() throws com.mendix.core.CoreException
+	{
+		return getResourceProvisioningOptions_Group(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ResourceProvisioningOptions_Group
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.ResourceProvisioningOptions getResourceProvisioningOptions_Group(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.ResourceProvisioningOptions result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ResourceProvisioningOptions_Group.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.ResourceProvisioningOptions.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of ResourceProvisioningOptions_Group
+	 * @param resourceprovisioningoptions_group
+	 */
+	public final void setResourceProvisioningOptions_Group(microsoftgraph.proxies.ResourceProvisioningOptions resourceprovisioningoptions_group)
+	{
+		setResourceProvisioningOptions_Group(getContext(), resourceprovisioningoptions_group);
+	}
+
+	/**
+	 * Set value of ResourceProvisioningOptions_Group
+	 * @param context
+	 * @param resourceprovisioningoptions_group
+	 */
+	public final void setResourceProvisioningOptions_Group(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ResourceProvisioningOptions resourceprovisioningoptions_group)
+	{
+		if (resourceprovisioningoptions_group == null) {
+			getMendixObject().setValue(context, MemberNames.ResourceProvisioningOptions_Group.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.ResourceProvisioningOptions_Group.toString(), resourceprovisioningoptions_group.getMendixObject().getId());
+		}
 	}
 
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Group that = (microsoftgraph.proxies.Group) obj;
@@ -642,13 +1097,14 @@ public class Group
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Group";
+		return entityName;
 	}
 
 	/**
 	 * @return String GUID from this object, format: ID_0000000000
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
+	@java.lang.Override
 	@java.lang.Deprecated
 	public java.lang.String getGUID()
 	{

@@ -28,7 +28,7 @@ public class List
 		SelectedList("Sharepoint.SelectedList"),
 		List_Drive("Sharepoint.List_Drive");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -44,15 +44,17 @@ public class List
 
 	public List(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.List"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected List(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject listMendixObject)
 	{
-		if (listMendixObject == null)
+		if (listMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.List", listMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.List");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, listMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.listMendixObject = listMendixObject;
 		this.context = context;
@@ -70,6 +72,9 @@ public class List
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.List initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -84,6 +89,7 @@ public class List
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -92,6 +98,7 @@ public class List
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -258,6 +265,7 @@ public class List
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of List_Explorer
 	 */
 	public final sharepoint.proxies.Explorer getList_Explorer() throws com.mendix.core.CoreException
@@ -268,13 +276,15 @@ public class List
 	/**
 	 * @param context
 	 * @return value of List_Explorer
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getList_Explorer(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.List_Explorer.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -294,13 +304,15 @@ public class List
 	 */
 	public final void setList_Explorer(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer list_explorer)
 	{
-		if (list_explorer == null)
+		if (list_explorer == null) {
 			getMendixObject().setValue(context, MemberNames.List_Explorer.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.List_Explorer.toString(), list_explorer.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of SelectedList
 	 */
 	public final sharepoint.proxies.Explorer getSelectedList() throws com.mendix.core.CoreException
@@ -311,13 +323,15 @@ public class List
 	/**
 	 * @param context
 	 * @return value of SelectedList
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getSelectedList(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.SelectedList.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -337,13 +351,15 @@ public class List
 	 */
 	public final void setSelectedList(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer selectedlist)
 	{
-		if (selectedlist == null)
+		if (selectedlist == null) {
 			getMendixObject().setValue(context, MemberNames.SelectedList.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.SelectedList.toString(), selectedlist.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of List_Drive
 	 */
 	public final sharepoint.proxies.Drive getList_Drive() throws com.mendix.core.CoreException
@@ -354,13 +370,15 @@ public class List
 	/**
 	 * @param context
 	 * @return value of List_Drive
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Drive getList_Drive(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Drive result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.List_Drive.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Drive.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -380,10 +398,11 @@ public class List
 	 */
 	public final void setList_Drive(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Drive list_drive)
 	{
-		if (list_drive == null)
+		if (list_drive == null) {
 			getMendixObject().setValue(context, MemberNames.List_Drive.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.List_Drive.toString(), list_drive.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -405,9 +424,9 @@ public class List
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.List that = (sharepoint.proxies.List) obj;
@@ -427,7 +446,7 @@ public class List
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.List";
+		return entityName;
 	}
 
 	/**

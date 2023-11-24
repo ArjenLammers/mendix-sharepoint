@@ -25,7 +25,7 @@ public class InnerError
 		Client_request_id("Client_request_id"),
 		InnerError_Error("MicrosoftGraph.InnerError_Error");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,15 +41,17 @@ public class InnerError
 
 	public InnerError(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.InnerError"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected InnerError(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject innerErrorMendixObject)
 	{
-		if (innerErrorMendixObject == null)
+		if (innerErrorMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.InnerError", innerErrorMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.InnerError");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, innerErrorMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.innerErrorMendixObject = innerErrorMendixObject;
 		this.context = context;
@@ -67,6 +69,9 @@ public class InnerError
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.InnerError initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -81,6 +86,7 @@ public class InnerError
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -89,6 +95,7 @@ public class InnerError
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -219,6 +226,7 @@ public class InnerError
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of InnerError_Error
 	 */
 	public final microsoftgraph.proxies.Error getInnerError_Error() throws com.mendix.core.CoreException
@@ -229,13 +237,15 @@ public class InnerError
 	/**
 	 * @param context
 	 * @return value of InnerError_Error
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.Error getInnerError_Error(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.Error result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.InnerError_Error.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.Error.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -255,10 +265,11 @@ public class InnerError
 	 */
 	public final void setInnerError_Error(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Error innererror_error)
 	{
-		if (innererror_error == null)
+		if (innererror_error == null) {
 			getMendixObject().setValue(context, MemberNames.InnerError_Error.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.InnerError_Error.toString(), innererror_error.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -280,9 +291,9 @@ public class InnerError
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.InnerError that = (microsoftgraph.proxies.InnerError) obj;
@@ -302,7 +313,7 @@ public class InnerError
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.InnerError";
+		return entityName;
 	}
 
 	/**

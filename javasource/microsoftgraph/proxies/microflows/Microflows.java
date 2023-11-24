@@ -7,19 +7,25 @@ package microsoftgraph.proxies.microflows;
 import java.util.HashMap;
 import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class Microflows
 {
+	/**
+	 * @deprecated
+	 * The default constructor of the Microflows class should not be used.
+	 * Use the static microflow invocation methods instead.
+	 */
+	@java.lang.Deprecated(since = "9.12", forRemoval = true)
+	public Microflows() {}
+
 	// These are the microflows for the MicrosoftGraph module
-	public static void aCT_Attendee_Add(IContext context, microsoftgraph.proxies.Recipients _recipients)
+	public static void aCR_Subscription(IContext context, microsoftgraph.proxies.Subscription _subscription)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Recipients", _recipients == null ? null : _recipients.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Attendee_Add").withParams(params).execute(context);
+		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.ACR_Subscription").withParams(params).execute(context);
 	}
 	public static void aCT_Authentication_Delete(IContext context, microsoftgraph.proxies.Authentication _authentication)
 	{
@@ -33,128 +39,31 @@ public class Microflows
 		params.put("Authentication", _authentication == null ? null : _authentication.getMendixObject());
 		Core.microflowCall("MicrosoftGraph.ACT_Authentication_ToggleActive").withParams(params).execute(context);
 	}
-	public static void aCT_Authorization_ReAuthorize(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static void aCT_Authorization_Reauthorize(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Authorization_ReAuthorize").withParams(params).execute(context);
+		Core.microflowCall("MicrosoftGraph.ACT_Authorization_Reauthorize").withParams(params).execute(context);
 	}
-	public static void aCT_EntityType_Create(IContext context, microsoftgraph.proxies.EntityTypes _entityTypes)
+	public static void aCT_Group_Delete(IContext context, microsoftgraph.proxies.Group _group)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("EntityTypes", _entityTypes == null ? null : _entityTypes.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_EntityType_Create").withParams(params).execute(context);
+		params.put("Group", _group == null ? null : _group.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.ACT_Group_Delete").withParams(params).execute(context);
 	}
-	public static void aCT_Locations_AddLocation(IContext context, microsoftgraph.proxies.Locations _locations, microsoftgraph.proxies.Message _message)
+	public static void aCT_Group_View(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Group _group)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Locations", _locations == null ? null : _locations.getMendixObject());
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Locations_AddLocation").withParams(params).execute(context);
-	}
-	public static void aCT_MeetingParticipant_Add(IContext context, microsoftgraph.proxies.Attendees _attendees)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Attendees", _attendees == null ? null : _attendees.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_MeetingParticipant_Add").withParams(params).execute(context);
-	}
-	public static void aCT_Message_CreateEvent(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MicrosoftGraph.ACT_Message_CreateEvent").withParams(params).execute(context);
-	}
-	public static void aCT_Message_CreateFindMeetingTimesRequest(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MicrosoftGraph.ACT_Message_CreateFindMeetingTimesRequest").withParams(params).execute(context);
-	}
-	public static void aCT_Message_CreateLocationConstraint(IContext context, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_CreateLocationConstraint").withParams(params).execute(context);
-	}
-	public static void aCT_Message_CreateTimeConstraint(IContext context, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_CreateTimeConstraint").withParams(params).execute(context);
-	}
-	public static void aCT_Message_DeleteEvent(IContext context, microsoftgraph.proxies.Message _message, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_DeleteEvent").withParams(params).execute(context);
+		params.put("Group", _group == null ? null : _group.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.ACT_Group_View").withParams(params).execute(context);
 	}
-	public static void aCT_Message_DeleteMail(IContext context, microsoftgraph.proxies.Message _message, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_DeleteMail").withParams(params).execute(context);
-	}
-	public static void aCT_Message_New(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MicrosoftGraph.ACT_Message_New").withParams(params).execute(context);
-	}
-	public static void aCT_Message_SendEvent(IContext context, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_SendEvent").withParams(params).execute(context);
-	}
-	public static void aCT_Message_SendFindMeetingTimesRequest(IContext context, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_SendFindMeetingTimesRequest").withParams(params).execute(context);
-	}
-	public static void aCT_Message_SendMail(IContext context, microsoftgraph.proxies.Request _root)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Root", _root == null ? null : _root.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Message_SendMail").withParams(params).execute(context);
-	}
-	public static void aCT_OnlineMeeting_Create(IContext context, microsoftgraph.proxies.OnlineMeeting _onlineMeeting)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OnlineMeeting", _onlineMeeting == null ? null : _onlineMeeting.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_OnlineMeeting_Create").withParams(params).execute(context);
-	}
-	public static void aCT_OnlineMeeting_New(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MicrosoftGraph.ACT_OnlineMeeting_New").withParams(params).execute(context);
-	}
-	public static microsoftgraph.proxies.Photo aCT_Photo_Parameter(IContext context, microsoftgraph.proxies.Photo _mappingParameter)
+	public static microsoftgraph.proxies.ProfilePhoto aCT_Photo_Parameter(IContext context, microsoftgraph.proxies.ProfilePhoto _mappingParameter)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("MappingParameter", _mappingParameter == null ? null : _mappingParameter.getMendixObject());
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.ACT_Photo_Parameter").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Photo.initialize(context, result);
-	}
-	public static system.proxies.User aCT_PRS_Authentication(IContext context, system.proxies.HttpRequest _httpRequest, java.lang.String _state)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("HttpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
-		params.put("state", _state);
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.ACT_PRS_Authentication").withParams(params).execute(context);
-		return result == null ? null : system.proxies.User.initialize(context, result);
-	}
-	public static void aCT_Recipient_Add(IContext context, microsoftgraph.proxies.Recipients _recipients)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Recipients", _recipients == null ? null : _recipients.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Recipient_Add").withParams(params).execute(context);
-	}
-	public static void aCT_Request_Search(IContext context, microsoftgraph.proxies.Search _search, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Search", _search == null ? null : _search.getMendixObject());
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Request_Search").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.ProfilePhoto.initialize(context, result);
 	}
 	public static void aCT_StringArrayWrapper_Create(IContext context, microsoftgraph.proxies.StringArray _stringArray)
 	{
@@ -175,29 +84,17 @@ public class Microflows
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		Core.microflowCall("MicrosoftGraph.ACT_Subscription_Delete").withParams(params).execute(context);
 	}
-	public static void aCT_Subscription_New(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("MicrosoftGraph.ACT_Subscription_New").withParams(params).execute(context);
-	}
-	public static void aCT_Subscription_Renew(IContext context, microsoftgraph.proxies.Subscription _subscription)
+	public static void aCT_Subscription_Update(IContext context, microsoftgraph.proxies.Subscription _subscription)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_Subscription_Renew").withParams(params).execute(context);
+		Core.microflowCall("MicrosoftGraph.ACT_Subscription_Update").withParams(params).execute(context);
 	}
 	public static void aCT_SubscriptionGetAll(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		Core.microflowCall("MicrosoftGraph.ACT_SubscriptionGetAll").withParams(params).execute(context);
-	}
-	public static void aCT_TimeConstraint_AddTimeslot(IContext context, microsoftgraph.proxies.TimeConstraint _timeConstraint, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("TimeConstraint", _timeConstraint == null ? null : _timeConstraint.getMendixObject());
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		Core.microflowCall("MicrosoftGraph.ACT_TimeConstraint_AddTimeslot").withParams(params).execute(context);
 	}
 	public static void aCT_User_Create(IContext context, microsoftgraph.proxies.User _user)
 	{
@@ -229,11 +126,18 @@ public class Microflows
 		params.put("Authentication", _authentication == null ? null : _authentication.getMendixObject());
 		return (java.lang.Long) Core.microflowCall("MicrosoftGraph.CAL_Authentication_AuthorizedUsers").withParams(params).execute(context);
 	}
-	public static java.lang.String convert_ChangeType(IContext context, microsoftgraph.proxies.ENUM_ChangeType _changeType)
+	public static java.lang.String convert_ChangeType_Export(IContext context, microsoftgraph.proxies.ENUM_ChangeType _changeType)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("ChangeType", _changeType == null ? null : _changeType.name());
-		return (java.lang.String) Core.microflowCall("MicrosoftGraph.Convert_ChangeType").withParams(params).execute(context);
+		return (java.lang.String) Core.microflowCall("MicrosoftGraph.Convert_ChangeType_Export").withParams(params).execute(context);
+	}
+	public static microsoftgraph.proxies.ENUM_ChangeType convert_ChangeType_Import(IContext context, java.lang.String _changeType)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("changeType", _changeType);
+		java.lang.String result = (java.lang.String) Core.microflowCall("MicrosoftGraph.Convert_ChangeType_Import").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.ENUM_ChangeType.valueOf(result);
 	}
 	public static system.proxies.HttpResponse dELETE(IContext context, java.lang.String _location, java.lang.String _contentType, microsoftgraph.proxies.Authorization _authorization, java.lang.String _request)
 	{
@@ -245,47 +149,24 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DELETE").withParams(params).execute(context);
 		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
 	}
-	public static microsoftgraph.proxies.Request dS_Group_GetAllGroups(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static microsoftgraph.proxies.Authorization dS_Authorization_Active(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_Group_GetAllGroups").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_Authorization_Active").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.Authorization.initialize(context, result);
 	}
-	public static microsoftgraph.proxies.MailboxSettings dS_MailboxSettings(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static java.util.List<microsoftgraph.proxies.Group> dS_Group_GetAllGroups(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_MailboxSettings").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.MailboxSettings.initialize(context, result);
-	}
-	public static java.util.List<microsoftgraph.proxies.Message> dS_Message_GetCalendar(IContext context, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_Message_GetCalendar").withParams(params).execute(context);
-		java.util.List<microsoftgraph.proxies.Message> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(microsoftgraph.proxies.Message.initialize(context, obj));
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_Group_GetAllGroups").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.Group.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
-	}
-	public static java.util.List<microsoftgraph.proxies.Message> dS_Message_ListMail(IContext context, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_Message_ListMail").withParams(params).execute(context);
-		java.util.List<microsoftgraph.proxies.Message> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(microsoftgraph.proxies.Message.initialize(context, obj));
-		}
-		return result;
 	}
 	public static microsoftgraph.proxies.ModuleSetup dS_ModuleSetup_Check(IContext context)
 	{
@@ -293,32 +174,64 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_ModuleSetup_Check").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.ModuleSetup.initialize(context, result);
 	}
-	public static microsoftgraph.proxies.Search dS_Request_Search(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_Request_Search").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Search.initialize(context, result);
-	}
-	public static microsoftgraph.proxies.Request dS_User_AllUsers(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static java.util.List<microsoftgraph.proxies.User> dS_User_AllUsers(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_User_AllUsers").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_User_AllUsers").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
 	}
-	public static microsoftgraph.proxies.Request dS_User_DirectReports(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static java.util.List<microsoftgraph.proxies.User> dS_User_DirectReports(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_User_DirectReports").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_User_DirectReports").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
 	}
-	public static microsoftgraph.proxies.Photo dS_User_MyPhoto(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static java.util.List<microsoftgraph.proxies.User> dS_User_ListGroupMembers(IContext context, microsoftgraph.proxies.Group _group)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Group", _group == null ? null : _group.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_User_ListGroupMembers").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	public static java.util.List<microsoftgraph.proxies.User> dS_User_ListGroupOwners(IContext context, microsoftgraph.proxies.Group _group)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Group", _group == null ? null : _group.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.DS_User_ListGroupOwners").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	public static microsoftgraph.proxies.ProfilePhoto dS_User_MyPhoto(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.DS_User_MyPhoto").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Photo.initialize(context, result);
+		return result == null ? null : microsoftgraph.proxies.ProfilePhoto.initialize(context, result);
 	}
 	public static microsoftgraph.proxies.User dS_User_MyProfile(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
@@ -370,7 +283,34 @@ public class Microflows
 		params.put("validationToken", _validationToken);
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.PostNotification").withParams(params).execute(context);
 	}
-	public static java.lang.String pRS_GetCallback(IContext context, system.proxies.HttpRequest _httpRequest, system.proxies.HttpResponse _httpResponse, java.lang.String _code, java.lang.String _state, java.lang.String _admin_consent, java.lang.String _tenant, java.lang.String _error, java.lang.String _error_uri, java.lang.String _error_description)
+	/**
+	 * Apps subscribing to change notifications might get their subscriptions removed and miss some change notifications. Apps should implement logic to detect and recover from the loss, and resume a continuous change notification flow.
+	 * Certain events can cause a subscription to be removed. These events include:
+	 * User's password has been reset
+	 * User's device is out of compliance
+	 * User's account has been revoked
+	 * When such an event happens, Microsoft Graph sends a special lifecycle notification, subscriptionRemoved.
+	 * Microsoft Graph also sends another lifecycle notification, missed, if a change notification cannot be delivered to an app.
+	 * An app subscribing to change notifications should listen to the subscriptionRemoved and missed signals and do the following:
+	 * Upon receiving a subscriptionRemoved lifecycle notification, the app should recreate the subscription in order to maintain a continuous flow.
+	 * On receiving a missed lifecycle notification, the app should resynchronize resource data using Microsoft Graph.
+	 * To receive lifecycle notifications, you can use the existing notificationUrl endpoint that already receives change notifications, or you can register a separate lifecycleNotificationUrl to receive subscriptionRemoved and missed lifecycle notifications in a separate endpoint.
+	 * Lifecycle notifications are supported for subscriptions created on these resource types:
+	 * Outlook message
+	 * Outlook event
+	 * Outlook personal contact
+	 * Teams chatMessage
+	 * For other resource types, you may still provide a lifecycleNotificationUrl when creating the subscription and your application will receive lifecycle notifications whenever the resource implements it.
+	 */
+	public static java.lang.String postSubscription_LifeCycleNotifications(IContext context, system.proxies.HttpRequest _httpRequest, system.proxies.HttpResponse _httpResponse, java.lang.String _validationToken)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
+		params.put("httpResponse", _httpResponse == null ? null : _httpResponse.getMendixObject());
+		params.put("validationToken", _validationToken);
+		return (java.lang.String) Core.microflowCall("MicrosoftGraph.PostSubscription_LifeCycleNotifications").withParams(params).execute(context);
+	}
+	public static java.lang.String pRS_GetCallback(IContext context, system.proxies.HttpRequest _httpRequest, system.proxies.HttpResponse _httpResponse, java.lang.String _code, java.lang.String _state, java.lang.String _admin_consent, java.lang.String _tenant, java.lang.String _error, java.lang.String _error_uri, java.lang.String _error_description, java.lang.String _error_subcode)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
@@ -382,24 +322,39 @@ public class Microflows
 		params.put("error", _error);
 		params.put("error_uri", _error_uri);
 		params.put("error_description", _error_description);
+		params.put("error_subcode", _error_subcode);
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.PRS_GetCallback").withParams(params).execute(context);
 	}
-	public static java.lang.String pRS_PostCallback(IContext context, system.proxies.HttpRequest _httpRequest, system.proxies.HttpResponse _httpResponse, java.lang.String _form_post)
+	public static java.lang.String pRS_PostCallback(IContext context, system.proxies.HttpRequest _httpRequest, system.proxies.HttpResponse _httpResponse)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
 		params.put("httpResponse", _httpResponse == null ? null : _httpResponse.getMendixObject());
-		params.put("form_post", _form_post);
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.PRS_PostCallback").withParams(params).execute(context);
 	}
-	public static system.proxies.HttpResponse pUT(IContext context, java.lang.String _location, java.lang.String _contentType, microsoftgraph.proxies.Authorization _authorization, java.lang.String _request)
+	public static system.proxies.HttpResponse pUT(IContext context, java.lang.String _location, java.lang.String _contentType, microsoftgraph.proxies.Authorization _authorization, java.lang.String _request, java.lang.String _contentLength, java.lang.String _contentRange)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Location", _location);
 		params.put("ContentType", _contentType);
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		params.put("Request", _request);
+		params.put("ContentLength", _contentLength);
+		params.put("ContentRange", _contentRange);
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.PUT").withParams(params).execute(context);
+		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
+	}
+	public static system.proxies.HttpResponse pUT_Binary(IContext context, java.lang.String _location, java.lang.String _contentType, microsoftgraph.proxies.Authorization _authorization, java.lang.String _request, java.lang.String _contentLength, java.lang.String _contentRange, system.proxies.FileDocument _request_Binary)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Location", _location);
+		params.put("ContentType", _contentType);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("Request", _request);
+		params.put("ContentLength", _contentLength);
+		params.put("ContentRange", _contentRange);
+		params.put("Request_Binary", _request_Binary == null ? null : _request_Binary.getMendixObject());
+		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.PUT_Binary").withParams(params).execute(context);
 		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
 	}
 	public static void sCE_Subscription_RenewAll(IContext context)
@@ -432,6 +387,19 @@ public class Microflows
 		params.put("Authentication", _authentication == null ? null : _authentication.getMendixObject());
 		Core.microflowCall("MicrosoftGraph.SUB_Authentication_SetDefaultConfiguration").withParams(params).execute(context);
 	}
+	public static boolean sUB_Authorization_GetAccessToken_AuthorizationCode(IContext context, java.lang.String _code, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Code", _code);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetAccessToken_AuthorizationCode").withParams(params).execute(context);
+	}
+	public static boolean sUB_Authorization_GetAccessToken_ClientCredentials(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetAccessToken_ClientCredentials").withParams(params).execute(context);
+	}
 	public static microsoftgraph.proxies.Authorization sUB_Authorization_GetActive(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -445,6 +413,13 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetActiveByAuthentication").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.Authorization.initialize(context, result);
 	}
+	public static void sUB_Authorization_GetFromForm(IContext context, system.proxies.HttpRequest _httpRequest, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetFromForm").withParams(params).execute(context);
+	}
 	public static microsoftgraph.proxies.Authorization sUB_Authorization_GetOrCreate(IContext context, microsoftgraph.proxies.Authentication _authentication)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -452,21 +427,18 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetOrCreate").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.Authorization.initialize(context, result);
 	}
-	public static microsoftgraph.proxies.Authorization sUB_Authorization_GetToken(IContext context, java.lang.String _state, java.lang.String _code, java.lang.String _admin_consent)
+	public static void sUB_Authorization_ProcessSuccessfulResponse(IContext context, system.proxies.HttpResponse _response, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("State", _state);
-		params.put("Code", _code);
-		params.put("admin_consent", _admin_consent);
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Authorization_GetToken").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Authorization.initialize(context, result);
+		params.put("Response", _response == null ? null : _response.getMendixObject());
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.SUB_Authorization_ProcessSuccessfulResponse").withParams(params).execute(context);
 	}
-	public static microsoftgraph.proxies.Authorization sUB_Authorization_MappingParameter(IContext context, microsoftgraph.proxies.Authorization _mappingParameter)
+	public static boolean sUB_Authorization_Reauthorize(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("MappingParameter", _mappingParameter == null ? null : _mappingParameter.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Authorization_MappingParameter").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Authorization.initialize(context, result);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Authorization_Reauthorize").withParams(params).execute(context);
 	}
 	public static boolean sUB_Authorization_RefreshAccessToken(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
@@ -480,18 +452,97 @@ public class Microflows
 		params.put("Scope", _scope);
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.SUB_Authorization_SetNonce").withParams(params).execute(context);
 	}
+	public static java.util.List<microsoftgraph.proxies.BatchResponse> sUB_BatchRequest_Send(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Batch _batchRequest)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("BatchRequest", _batchRequest == null ? null : _batchRequest.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_BatchRequest_Send").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.BatchResponse.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
 	public static java.lang.String sUB_ChangeNotification_Process(IContext context, system.proxies.HttpRequest _httpRequest)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.SUB_ChangeNotification_Process").withParams(params).execute(context);
 	}
-	public static microsoftgraph.proxies.Request sUB_Group_GetAll(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	public static void sUB_ChangeNotification_ProcessLifeCycleEvent(IContext context, system.proxies.HttpRequest _httpRequest)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("httpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
+		Core.microflowCall("MicrosoftGraph.SUB_ChangeNotification_ProcessLifeCycleEvent").withParams(params).execute(context);
+	}
+	public static void sUB_ChangeNotification_Validate(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("MicrosoftGraph.SUB_ChangeNotification_Validate").withParams(params).execute(context);
+	}
+	/**
+	 * Add a member to a security or Microsoft 365 group through the members navigation property.
+	 */
+	public static boolean sUB_Group_AddMember(IContext context, java.lang.String _groupId, microsoftgraph.proxies.Authorization _authorization, java.lang.String _directoryObjectId)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("GroupId", _groupId);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("DirectoryObjectId", _directoryObjectId);
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Group_AddMember").withParams(params).execute(context);
+	}
+	/**
+	 * When deleted, Microsoft 365 groups are moved to a temporary container and can be restored within 30 days. After that time, they're permanently deleted. This isn't applicable to Security groups and Distribution groups which are permanently deleted immediately. To learn more, see deletedItems.
+	 */
+	public static boolean sUB_Group_Delete(IContext context, java.lang.String _groupId, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("GroupId", _groupId);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Group_Delete").withParams(params).execute(context);
+	}
+	/**
+	 * List all the groups in an organization, including but not limited to Microsoft 365 groups.
+	 * This operation returns by default only a subset of the more commonly used properties for each group. These default properties are noted in the Properties section. To get properties that are not returned by default, do a GET operation for the group and specify the properties in a $select OData query option. The hasMembersWithLicenseErrors property is an exception and is not returned in the $select query.
+	 */
+	public static java.util.List<microsoftgraph.proxies.Group> sUB_Group_GetAll(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Group_GetAll").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_Group_GetAll").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.Group.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	/**
+	 * Get the properties and relationships of a group object.
+	 * This operation returns by default only a subset of all the available properties, as noted in the Properties section. To get properties that are not returned by default, specify them in a $select OData query option. The hasMembersWithLicenseErrors and isArchived properties are an exception and are not returned in the $select query.
+	 */
+	public static microsoftgraph.proxies.Group sUB_Group_GetById(IContext context, java.lang.String _groupId, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("GroupId", _groupId);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Group_GetById").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.Group.initialize(context, result);
+	}
+	/**
+	 * Remove a member from a group via the members navigation property. You can't remove a member from groups with dynamic memberships.
+	 */
+	public static boolean sUB_Group_RemoveMember(IContext context, java.lang.String _groupId, microsoftgraph.proxies.Authorization _authorization, java.lang.String _directoryObjectId)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("GroupId", _groupId);
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("DirectoryObjectId", _directoryObjectId);
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Group_RemoveMember").withParams(params).execute(context);
 	}
 	public static java.lang.String sUB_HttpMessage_ParseFormData(IContext context, java.lang.String _key, system.proxies.HttpRequest _httpRequest)
 	{
@@ -500,71 +551,12 @@ public class Microflows
 		params.put("HttpRequest", _httpRequest == null ? null : _httpRequest.getMendixObject());
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.SUB_HttpMessage_ParseFormData").withParams(params).execute(context);
 	}
-	public static void sUB_httpResponse_Validate(IContext context, system.proxies.HttpResponse _httpResponse, java.lang.String _validationToken)
+	public static void sUB_httpResponse_ValidateToken(IContext context, system.proxies.HttpResponse _httpResponse, java.lang.String _validationToken)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("httpResponse", _httpResponse == null ? null : _httpResponse.getMendixObject());
 		params.put("validationToken", _validationToken);
-		Core.microflowCall("MicrosoftGraph.SUB_httpResponse_Validate").withParams(params).execute(context);
-	}
-	public static microsoftgraph.proxies.MailboxSettings sUB_MailboxSettings_Get(IContext context, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_MailboxSettings_Get").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.MailboxSettings.initialize(context, result);
-	}
-	public static boolean sUB_Message_DeleteEvent(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _id)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Id", _id);
-		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Message_DeleteEvent").withParams(params).execute(context);
-	}
-	public static boolean sUB_Message_DeleteMail(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _id)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Id", _id);
-		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Message_DeleteMail").withParams(params).execute(context);
-	}
-	public static microsoftgraph.proxies.Request sUB_Message_GetCalendarEvents(IContext context, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Message_GetCalendarEvents").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
-	}
-	public static microsoftgraph.proxies.Request sUB_Message_GetMail(IContext context, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Message_GetMail").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
-	}
-	public static system.proxies.HttpResponse sUB_Message_SendEvent(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Message_SendEvent").withParams(params).execute(context);
-		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
-	}
-	public static system.proxies.HttpResponse sUB_Message_SendFindMeetingTimesRequest(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Message_SendFindMeetingTimesRequest").withParams(params).execute(context);
-		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
-	}
-	public static system.proxies.HttpResponse sUB_Message_SendMail(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Request _root)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Root", _root == null ? null : _root.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Message_SendMail").withParams(params).execute(context);
-		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
+		Core.microflowCall("MicrosoftGraph.SUB_httpResponse_ValidateToken").withParams(params).execute(context);
 	}
 	public static microsoftgraph.proxies.ModuleSetup sUB_ModuleSetup_GetOrCreate(IContext context)
 	{
@@ -572,29 +564,12 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_ModuleSetup_GetOrCreate").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.ModuleSetup.initialize(context, result);
 	}
-	public static system.proxies.HttpResponse sUB_OnlineMeeting_Create(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.OnlineMeeting _onlineMeeting)
+	public static java.lang.String sUB_Response_ErrorMessage(IContext context, system.proxies.HttpResponse _httpResponse, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("HttpResponse", _httpResponse == null ? null : _httpResponse.getMendixObject());
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("OnlineMeeting", _onlineMeeting == null ? null : _onlineMeeting.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_OnlineMeeting_Create").withParams(params).execute(context);
-		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
-	}
-	public static microsoftgraph.proxies.OnlineMeeting sUB_OnlineMeeting_GetUsingJoinWebURL(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Message _message)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Message", _message == null ? null : _message.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_OnlineMeeting_GetUsingJoinWebURL").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.OnlineMeeting.initialize(context, result);
-	}
-	public static system.proxies.HttpResponse sUB_Request_Search(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Search _search)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		params.put("Search", _search == null ? null : _search.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_Request_Search").withParams(params).execute(context);
-		return result == null ? null : system.proxies.HttpResponse.initialize(context, result);
+		return (java.lang.String) Core.microflowCall("MicrosoftGraph.SUB_Response_ErrorMessage").withParams(params).execute(context);
 	}
 	public static java.lang.String sUB_Scopes_Get(IContext context, microsoftgraph.proxies.Authentication _authentication)
 	{
@@ -602,6 +577,19 @@ public class Microflows
 		params.put("Authentication", _authentication == null ? null : _authentication.getMendixObject());
 		return (java.lang.String) Core.microflowCall("MicrosoftGraph.SUB_Scopes_Get").withParams(params).execute(context);
 	}
+	/**
+	 * Subscribes a listener application to receive change notifications when the requested type of changes occur to the specified resource in Microsoft Graph.
+	 */
+	public static boolean sUB_Subscription_Create(IContext context, microsoftgraph.proxies.Subscription _subscription, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Subscription_Create").withParams(params).execute(context);
+	}
+	/**
+	 * Delete a subscription.
+	 */
 	public static boolean sUB_Subscription_Delete(IContext context, microsoftgraph.proxies.Subscription _subscription, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -609,20 +597,38 @@ public class Microflows
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Subscription_Delete").withParams(params).execute(context);
 	}
+	/**
+	 * Retrieve the properties and relationships of webhook subscriptions, based on the app ID, the user, and the user's role with a tenant.
+	 * The content of the response depends on the context in which the app is calling; for details, see the scenarios in https://docs.microsoft.com/en-us/graph/api/subscription-list?view=graph-rest-1.0&tabs=http#permissions.
+	 */
 	public static java.util.List<microsoftgraph.proxies.Subscription> sUB_Subscription_GetAll(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_Subscription_GetAll").withParams(params).execute(context);
-		java.util.List<microsoftgraph.proxies.Subscription> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(microsoftgraph.proxies.Subscription.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.Subscription.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
+	/**
+	 * Reauthorize the subscription without extending its expiration date
+	 */
+	public static boolean sUB_Subscription_Reauthorize(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Subscription _subscription)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Subscription_Reauthorize").withParams(params).execute(context);
+	}
+	/**
+	 * Renew a subscription by extending its expiry time.
+	 * The table in the Permissions section lists the resources that support subscribing to change notifications.
+	 * Subscriptions expire after a length of time that varies by resource type. In order to avoid missing change notifications, an app should renew its subscriptions well in advance of their expiry date.
+	 */
 	public static boolean sUB_Subscription_Renew(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.Subscription _subscription)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -630,13 +636,10 @@ public class Microflows
 		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
 		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Subscription_Renew").withParams(params).execute(context);
 	}
-	public static boolean sUB_Subscription_Subscribe(IContext context, microsoftgraph.proxies.Subscription _subscription, microsoftgraph.proxies.Authorization _authorization)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("Subscription", _subscription == null ? null : _subscription.getMendixObject());
-		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_Subscription_Subscribe").withParams(params).execute(context);
-	}
+	/**
+	 * Create a new user. The request body contains the user to create. At a minimum, you must specify the required properties for the user. You can optionally specify any other writable properties.
+	 * This operation returns by default only a subset of the properties for each user. These default properties are noted in the Properties section. To get properties that are not returned by default, do a GET operation and specify the properties in a $select OData query option.
+	 */
 	public static boolean sUB_User_Create(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.User _user)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -644,27 +647,82 @@ public class Microflows
 		params.put("User", _user == null ? null : _user.getMendixObject());
 		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_User_Create").withParams(params).execute(context);
 	}
-	public static microsoftgraph.proxies.Request sUB_User_GetAllUsers(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	/**
+	 * Retrieve a list of user objects.
+	 * This operation returns by default only a subset of the more commonly used properties for each user. These default properties are noted in the Properties section. To get properties that are not returned by default, do a GET operation for the user and specify the properties in a $select OData query option.
+	 */
+	public static java.util.List<microsoftgraph.proxies.User> sUB_User_GetAllUsers(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetAllUsers").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_User_GetAllUsers").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
 	}
-	public static microsoftgraph.proxies.Request sUB_User_GetMyDirectReports(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	/**
+	 * Retrieve the properties and relationships of user object.
+	 */
+	public static microsoftgraph.proxies.User sUB_User_GetById(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _userId)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetMyDirectReports").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Request.initialize(context, result);
+		params.put("UserId", _userId);
+		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetById").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.User.initialize(context, result);
 	}
-	public static microsoftgraph.proxies.Photo sUB_User_GetMyPhoto(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	/**
+	 * Get newly created, updated, or deleted users without having to perform a full read of the entire user collection. See change tracking for details.
+	 */
+	public static java.util.List<microsoftgraph.proxies.User> sUB_User_GetDelta(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.DeltaQuery _deltaQuery)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("DeltaQuery", _deltaQuery == null ? null : _deltaQuery.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_User_GetDelta").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	/**
+	 * Get a user's direct reports. Returns the users and contacts for whom this user is assigned as manager.
+	 */
+	public static java.util.List<microsoftgraph.proxies.User> sUB_User_GetMyDirectReports(IContext context, microsoftgraph.proxies.Authorization _authorization)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_User_GetMyDirectReports").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	/**
+	 * Get the specified profilePhoto or its metadata (profilePhoto properties).
+	 * The supported sizes of HD photos on Microsoft 365 are as follows: 48x48, 64x64, 96x96, 120x120, 240x240, 360x360, 432x432, 504x504, and 648x648. Photos can be any dimension if they are stored in Azure Active Directory.
+	 * You can get the metadata of the largest available photo, or specify a size to get the metadata for that photo size. If the size you request is not available, you can still get a smaller size that the user has uploaded and made available. For example, if the user uploads a photo that is 504x504 pixels, all but the 648x648 size of photo will be available for download.
+	 */
+	public static microsoftgraph.proxies.ProfilePhoto sUB_User_GetMyPhoto(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetMyPhoto").withParams(params).execute(context);
-		return result == null ? null : microsoftgraph.proxies.Photo.initialize(context, result);
+		return result == null ? null : microsoftgraph.proxies.ProfilePhoto.initialize(context, result);
 	}
+	/**
+	 * For the signed-in user
+	 */
 	public static microsoftgraph.proxies.User sUB_User_GetMyProfile(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -672,6 +730,72 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetMyProfile").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.User.initialize(context, result);
 	}
+	/**
+	 * Get the specified profilePhoto or its metadata (profilePhoto properties).
+	 * The supported sizes of HD photos on Microsoft 365 are as follows: 48x48, 64x64, 96x96, 120x120, 240x240, 360x360, 432x432, 504x504, and 648x648. Photos can be any dimension if they are stored in Azure Active Directory.
+	 * You can get the metadata of the largest available photo, or specify a size to get the metadata for that photo size. If the size you request is not available, you can still get a smaller size that the user has uploaded and made available. For example, if the user uploads a photo that is 504x504 pixels, all but the 648x648 size of photo will be available for download.
+	 */
+	public static microsoftgraph.proxies.ProfilePhoto sUB_User_GetProfilePhoto(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _userIdOrUserPrincipalName)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("UserIdOrUserPrincipalName", _userIdOrUserPrincipalName);
+		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_User_GetProfilePhoto").withParams(params).execute(context);
+		return result == null ? null : microsoftgraph.proxies.ProfilePhoto.initialize(context, result);
+	}
+	/**
+	 * Get a list of the group's direct members. A group can have users, organizational contacts, devices, service principals and other groups as members.
+	 */
+	public static java.util.List<microsoftgraph.proxies.User> sUB_User_ListGroupMembers(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _groupId)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("GroupId", _groupId);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_User_ListGroupMembers").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	/**
+	 * Retrieve a list of the group's owners. The owners are a set of users or service principals who are allowed to modify the group object. Owners are currently not available in Microsoft Graph for groups that were created in Exchange or groups that are synchronized from an on-premises environment.
+	 */
+	public static java.util.List<microsoftgraph.proxies.User> sUB_User_ListGroupOwners(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _groupId)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
+		params.put("GroupId", _groupId);
+		java.util.List<IMendixObject> objs = Core.microflowCall("MicrosoftGraph.SUB_User_ListGroupOwners").withParams(params).execute(context);
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> microsoftgraph.proxies.User.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
+		}
+	}
+	public static void sUB_User_ProcessResponse(IContext context, microsoftgraph.proxies.Response _request, java.util.List<microsoftgraph.proxies.User> _userList)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Request", _request == null ? null : _request.getMendixObject());
+		java.util.List<IMendixObject> listparam_userList = null;
+		if (_userList != null)
+		{
+			listparam_userList = new java.util.ArrayList<>();
+			for (var obj : _userList) {
+				listparam_userList.add(obj.getMendixObject());
+			}
+		}
+		params.put("UserList", listparam_userList);
+
+		Core.microflowCall("MicrosoftGraph.SUB_User_ProcessResponse").withParams(params).execute(context);
+	}
+	/**
+	 * Update the properties of a user object. Not all properties can be updated by Member or Guest users with their default permissions without Administrator roles. Compare member and guest default permissions to see properties they can manage.
+	 */
 	public static boolean sUB_User_Update(IContext context, microsoftgraph.proxies.Authorization _authorization, microsoftgraph.proxies.User _user)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -679,12 +803,21 @@ public class Microflows
 		params.put("User", _user == null ? null : _user.getMendixObject());
 		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_User_Update").withParams(params).execute(context);
 	}
+	/**
+	 * As part of the OpenID Connect (OIDC) standard, the UserInfo endpoint returns information about an authenticated user. In the Microsoft identity platform, the UserInfo endpoint is hosted by Microsoft Graph at https://graph.microsoft.com/oidc/userinfo.
+	 */
 	public static microsoftgraph.proxies.UserInfo sUB_UserInfo_Get(IContext context, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		IMendixObject result = (IMendixObject)Core.microflowCall("MicrosoftGraph.SUB_UserInfo_Get").withParams(params).execute(context);
 		return result == null ? null : microsoftgraph.proxies.UserInfo.initialize(context, result);
+	}
+	public static boolean sUB_ValidationTokens_Process(IContext context, microsoftgraph.proxies.ValidationTokens _validationTokens)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("ValidationTokens", _validationTokens == null ? null : _validationTokens.getMendixObject());
+		return (java.lang.Boolean) Core.microflowCall("MicrosoftGraph.SUB_ValidationTokens_Process").withParams(params).execute(context);
 	}
 	public static boolean val_Authentication(IContext context, microsoftgraph.proxies.Authentication _authentication)
 	{

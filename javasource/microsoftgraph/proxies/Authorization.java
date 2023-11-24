@@ -25,15 +25,18 @@ public class Authorization
 		Expires_In("Expires_In"),
 		Access_Token("Access_Token"),
 		Refresh_Token("Refresh_Token"),
+		Id_Token("Id_Token"),
 		State("State"),
 		Nonce("Nonce"),
-		Ext_expires_in("Ext_expires_in"),
+		Ext_Expires_In("Ext_Expires_In"),
 		Successful("Successful"),
+		AdminConsent("AdminConsent"),
+		GrantFlow("GrantFlow"),
 		Authorization_Authentication("MicrosoftGraph.Authorization_Authentication"),
 		UserInfo_Authorization("MicrosoftGraph.UserInfo_Authorization"),
 		Authorization_User("MicrosoftGraph.Authorization_User");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -49,15 +52,17 @@ public class Authorization
 
 	public Authorization(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Authorization"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Authorization(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject authorizationMendixObject)
 	{
-		if (authorizationMendixObject == null)
+		if (authorizationMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Authorization", authorizationMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Authorization");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, authorizationMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.authorizationMendixObject = authorizationMendixObject;
 		this.context = context;
@@ -75,6 +80,9 @@ public class Authorization
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Authorization initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -89,14 +97,16 @@ public class Authorization
 
 	public static java.util.List<microsoftgraph.proxies.Authorization> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<microsoftgraph.proxies.Authorization> result = new java.util.ArrayList<microsoftgraph.proxies.Authorization>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//MicrosoftGraph.Authorization" + xpathConstraint))
-			result.add(microsoftgraph.proxies.Authorization.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> microsoftgraph.proxies.Authorization.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -105,6 +115,7 @@ public class Authorization
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -201,7 +212,7 @@ public class Authorization
 	/**
 	 * @return value of Expires_In
 	 */
-	public final java.lang.String getExpires_In()
+	public final java.lang.Integer getExpires_In()
 	{
 		return getExpires_In(getContext());
 	}
@@ -210,16 +221,16 @@ public class Authorization
 	 * @param context
 	 * @return value of Expires_In
 	 */
-	public final java.lang.String getExpires_In(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getExpires_In(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Expires_In.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.Expires_In.toString());
 	}
 
 	/**
 	 * Set value of Expires_In
 	 * @param expires_in
 	 */
-	public final void setExpires_In(java.lang.String expires_in)
+	public final void setExpires_In(java.lang.Integer expires_in)
 	{
 		setExpires_In(getContext(), expires_in);
 	}
@@ -229,7 +240,7 @@ public class Authorization
 	 * @param context
 	 * @param expires_in
 	 */
-	public final void setExpires_In(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String expires_in)
+	public final void setExpires_In(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer expires_in)
 	{
 		getMendixObject().setValue(context, MemberNames.Expires_In.toString(), expires_in);
 	}
@@ -307,6 +318,42 @@ public class Authorization
 	}
 
 	/**
+	 * @return value of Id_Token
+	 */
+	public final java.lang.String getId_Token()
+	{
+		return getId_Token(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Id_Token
+	 */
+	public final java.lang.String getId_Token(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Id_Token.toString());
+	}
+
+	/**
+	 * Set value of Id_Token
+	 * @param id_token
+	 */
+	public final void setId_Token(java.lang.String id_token)
+	{
+		setId_Token(getContext(), id_token);
+	}
+
+	/**
+	 * Set value of Id_Token
+	 * @param context
+	 * @param id_token
+	 */
+	public final void setId_Token(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String id_token)
+	{
+		getMendixObject().setValue(context, MemberNames.Id_Token.toString(), id_token);
+	}
+
+	/**
 	 * @return value of State
 	 */
 	public final java.lang.String getState()
@@ -379,39 +426,39 @@ public class Authorization
 	}
 
 	/**
-	 * @return value of Ext_expires_in
+	 * @return value of Ext_Expires_In
 	 */
-	public final java.lang.Integer getExt_expires_in()
+	public final java.lang.Integer getExt_Expires_In()
 	{
-		return getExt_expires_in(getContext());
+		return getExt_Expires_In(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Ext_expires_in
+	 * @return value of Ext_Expires_In
 	 */
-	public final java.lang.Integer getExt_expires_in(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getExt_Expires_In(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.Ext_expires_in.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.Ext_Expires_In.toString());
 	}
 
 	/**
-	 * Set value of Ext_expires_in
+	 * Set value of Ext_Expires_In
 	 * @param ext_expires_in
 	 */
-	public final void setExt_expires_in(java.lang.Integer ext_expires_in)
+	public final void setExt_Expires_In(java.lang.Integer ext_expires_in)
 	{
-		setExt_expires_in(getContext(), ext_expires_in);
+		setExt_Expires_In(getContext(), ext_expires_in);
 	}
 
 	/**
-	 * Set value of Ext_expires_in
+	 * Set value of Ext_Expires_In
 	 * @param context
 	 * @param ext_expires_in
 	 */
-	public final void setExt_expires_in(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer ext_expires_in)
+	public final void setExt_Expires_In(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer ext_expires_in)
 	{
-		getMendixObject().setValue(context, MemberNames.Ext_expires_in.toString(), ext_expires_in);
+		getMendixObject().setValue(context, MemberNames.Ext_Expires_In.toString(), ext_expires_in);
 	}
 
 	/**
@@ -451,6 +498,88 @@ public class Authorization
 	}
 
 	/**
+	 * @return value of AdminConsent
+	 */
+	public final java.lang.Boolean getAdminConsent()
+	{
+		return getAdminConsent(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of AdminConsent
+	 */
+	public final java.lang.Boolean getAdminConsent(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.AdminConsent.toString());
+	}
+
+	/**
+	 * Set value of AdminConsent
+	 * @param adminconsent
+	 */
+	public final void setAdminConsent(java.lang.Boolean adminconsent)
+	{
+		setAdminConsent(getContext(), adminconsent);
+	}
+
+	/**
+	 * Set value of AdminConsent
+	 * @param context
+	 * @param adminconsent
+	 */
+	public final void setAdminConsent(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean adminconsent)
+	{
+		getMendixObject().setValue(context, MemberNames.AdminConsent.toString(), adminconsent);
+	}
+
+	/**
+	 * Set value of GrantFlow
+	 * @param grantflow
+	 */
+	public final microsoftgraph.proxies.ENUM_GrantFlow getGrantFlow()
+	{
+		return getGrantFlow(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of GrantFlow
+	 */
+	public final microsoftgraph.proxies.ENUM_GrantFlow getGrantFlow(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		Object obj = getMendixObject().getValue(context, MemberNames.GrantFlow.toString());
+		if (obj == null) {
+			return null;
+		}
+		return microsoftgraph.proxies.ENUM_GrantFlow.valueOf((java.lang.String) obj);
+	}
+
+	/**
+	 * Set value of GrantFlow
+	 * @param grantflow
+	 */
+	public final void setGrantFlow(microsoftgraph.proxies.ENUM_GrantFlow grantflow)
+	{
+		setGrantFlow(getContext(), grantflow);
+	}
+
+	/**
+	 * Set value of GrantFlow
+	 * @param context
+	 * @param grantflow
+	 */
+	public final void setGrantFlow(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_GrantFlow grantflow)
+	{
+		if (grantflow != null) {
+			getMendixObject().setValue(context, MemberNames.GrantFlow.toString(), grantflow.toString());
+		} else {
+			getMendixObject().setValue(context, MemberNames.GrantFlow.toString(), null);
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Authorization_Authentication
 	 */
 	public final microsoftgraph.proxies.Authentication getAuthorization_Authentication() throws com.mendix.core.CoreException
@@ -461,13 +590,15 @@ public class Authorization
 	/**
 	 * @param context
 	 * @return value of Authorization_Authentication
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.Authentication getAuthorization_Authentication(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.Authentication result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Authorization_Authentication.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.Authentication.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -487,13 +618,15 @@ public class Authorization
 	 */
 	public final void setAuthorization_Authentication(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Authentication authorization_authentication)
 	{
-		if (authorization_authentication == null)
+		if (authorization_authentication == null) {
 			getMendixObject().setValue(context, MemberNames.Authorization_Authentication.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Authorization_Authentication.toString(), authorization_authentication.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of UserInfo_Authorization
 	 */
 	public final microsoftgraph.proxies.UserInfo getUserInfo_Authorization() throws com.mendix.core.CoreException
@@ -504,13 +637,15 @@ public class Authorization
 	/**
 	 * @param context
 	 * @return value of UserInfo_Authorization
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.UserInfo getUserInfo_Authorization(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.UserInfo result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.UserInfo_Authorization.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.UserInfo.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -530,13 +665,15 @@ public class Authorization
 	 */
 	public final void setUserInfo_Authorization(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.UserInfo userinfo_authorization)
 	{
-		if (userinfo_authorization == null)
+		if (userinfo_authorization == null) {
 			getMendixObject().setValue(context, MemberNames.UserInfo_Authorization.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.UserInfo_Authorization.toString(), userinfo_authorization.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Authorization_User
 	 */
 	public final system.proxies.User getAuthorization_User() throws com.mendix.core.CoreException
@@ -547,13 +684,15 @@ public class Authorization
 	/**
 	 * @param context
 	 * @return value of Authorization_User
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final system.proxies.User getAuthorization_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		system.proxies.User result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Authorization_User.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = system.proxies.User.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -573,10 +712,11 @@ public class Authorization
 	 */
 	public final void setAuthorization_User(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.User authorization_user)
 	{
-		if (authorization_user == null)
+		if (authorization_user == null) {
 			getMendixObject().setValue(context, MemberNames.Authorization_User.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Authorization_User.toString(), authorization_user.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -598,9 +738,9 @@ public class Authorization
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Authorization that = (microsoftgraph.proxies.Authorization) obj;
@@ -620,7 +760,7 @@ public class Authorization
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Authorization";
+		return entityName;
 	}
 
 	/**

@@ -29,7 +29,7 @@ public class Column
 		BooleanValue("BooleanValue"),
 		Fields("Sharepoint.Fields");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -45,15 +45,17 @@ public class Column
 
 	public Column(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.Column"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Column(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject columnMendixObject)
 	{
-		if (columnMendixObject == null)
+		if (columnMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.Column", columnMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.Column");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, columnMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.columnMendixObject = columnMendixObject;
 		this.context = context;
@@ -71,6 +73,9 @@ public class Column
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.Column initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -85,6 +90,7 @@ public class Column
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -93,6 +99,7 @@ public class Column
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -166,9 +173,9 @@ public class Column
 	public final sharepoint.proxies.ColumnType getColumnType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.ColumnType.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return sharepoint.proxies.ColumnType.valueOf((java.lang.String) obj);
 	}
 
@@ -188,10 +195,11 @@ public class Column
 	 */
 	public final void setColumnType(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ColumnType columntype)
 	{
-		if (columntype != null)
+		if (columntype != null) {
 			getMendixObject().setValue(context, MemberNames.ColumnType.toString(), columntype.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ColumnType.toString(), null);
+		}
 	}
 
 	/**
@@ -375,6 +383,7 @@ public class Column
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Fields
 	 */
 	public final sharepoint.proxies.ListItem getFields() throws com.mendix.core.CoreException
@@ -385,13 +394,15 @@ public class Column
 	/**
 	 * @param context
 	 * @return value of Fields
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.ListItem getFields(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.ListItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Fields.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.ListItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -411,10 +422,11 @@ public class Column
 	 */
 	public final void setFields(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.ListItem fields)
 	{
-		if (fields == null)
+		if (fields == null) {
 			getMendixObject().setValue(context, MemberNames.Fields.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Fields.toString(), fields.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -436,9 +448,9 @@ public class Column
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.Column that = (sharepoint.proxies.Column) obj;
@@ -458,7 +470,7 @@ public class Column
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.Column";
+		return entityName;
 	}
 
 	/**

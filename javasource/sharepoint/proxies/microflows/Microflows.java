@@ -7,13 +7,19 @@ package sharepoint.proxies.microflows;
 import java.util.HashMap;
 import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class Microflows
 {
+	/**
+	 * @deprecated
+	 * The default constructor of the Microflows class should not be used.
+	 * Use the static microflow invocation methods instead.
+	 */
+	@java.lang.Deprecated(since = "9.12", forRemoval = true)
+	public Microflows() {}
+
 	// These are the microflows for the Sharepoint module
 	public static void aCT_CloseDriveItem(IContext context, sharepoint.proxies.DriveItem _driveItem)
 	{
@@ -21,11 +27,23 @@ public class Microflows
 		params.put("DriveItem", _driveItem == null ? null : _driveItem.getMendixObject());
 		Core.microflowCall("Sharepoint.ACT_CloseDriveItem").withParams(params).execute(context);
 	}
-	public static void aCT_CreateDriveItem(IContext context, sharepoint.proxies.List _list)
+	public static void aCT_CreateDriveItem_InDrive(IContext context, sharepoint.proxies.Drive _drive)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Drive", _drive == null ? null : _drive.getMendixObject());
+		Core.microflowCall("Sharepoint.ACT_CreateDriveItem_InDrive").withParams(params).execute(context);
+	}
+	public static void aCT_CreateDriveItem_InDriveItem(IContext context, sharepoint.proxies.DriveItem _driveItem)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("DriveItem", _driveItem == null ? null : _driveItem.getMendixObject());
+		Core.microflowCall("Sharepoint.ACT_CreateDriveItem_InDriveItem").withParams(params).execute(context);
+	}
+	public static void aCT_CreateDriveItem_Root(IContext context, sharepoint.proxies.List _list)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("List", _list == null ? null : _list.getMendixObject());
-		Core.microflowCall("Sharepoint.ACT_CreateDriveItem").withParams(params).execute(context);
+		Core.microflowCall("Sharepoint.ACT_CreateDriveItem_Root").withParams(params).execute(context);
 	}
 	public static void aCT_CreateDriveItemCreate(IContext context, sharepoint.proxies.CreateDriveItemHelper _createDriveItemHelper)
 	{
@@ -77,10 +95,12 @@ public class Microflows
 		params.put("ListItem", _listItem == null ? null : _listItem.getMendixObject());
 		Core.microflowCall("Sharepoint.ACT_OpenListItem").withParams(params).execute(context);
 	}
-	public static void aCT_OpenSite(IContext context, sharepoint.proxies.OpenSiteByIdRequest _openSiteByIdRequest)
+	public static void aCT_OpenSite(IContext context, sharepoint.proxies.Site _site, sharepoint.proxies.SearchSitesResult _searchSitesResult, sharepoint.proxies.Explorer _explorer)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("OpenSiteByIdRequest", _openSiteByIdRequest == null ? null : _openSiteByIdRequest.getMendixObject());
+		params.put("Site", _site == null ? null : _site.getMendixObject());
+		params.put("SearchSitesResult", _searchSitesResult == null ? null : _searchSitesResult.getMendixObject());
+		params.put("Explorer", _explorer == null ? null : _explorer.getMendixObject());
 		Core.microflowCall("Sharepoint.ACT_OpenSite").withParams(params).execute(context);
 	}
 	public static void aCT_OpenSiteById(IContext context, microsoftgraph.proxies.Authorization _authorization, sharepoint.proxies.Explorer _explorer)
@@ -89,6 +109,12 @@ public class Microflows
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		params.put("Explorer", _explorer == null ? null : _explorer.getMendixObject());
 		Core.microflowCall("Sharepoint.ACT_OpenSiteById").withParams(params).execute(context);
+	}
+	public static void aCT_OpenSiteFromSearch(IContext context, sharepoint.proxies.OpenSiteByIdRequest _openSiteByIdRequest)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("OpenSiteByIdRequest", _openSiteByIdRequest == null ? null : _openSiteByIdRequest.getMendixObject());
+		Core.microflowCall("Sharepoint.ACT_OpenSiteFromSearch").withParams(params).execute(context);
 	}
 	public static java.lang.String createDriveItem(IContext context, java.lang.String _siteId, microsoftgraph.proxies.Authorization _authorization, system.proxies.FileDocument _fileDocument, java.lang.String _parentId, sharepoint.proxies.ConflictBehavior _conflictBehavior, java.lang.String _driveId)
 	{
@@ -107,12 +133,13 @@ public class Microflows
 		params.put("SiteId", _siteId);
 		params.put("ListId", _listId);
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
-		java.util.ArrayList<IMendixObject> listparam_fields = null;
+		java.util.List<IMendixObject> listparam_fields = null;
 		if (_fields != null)
 		{
 			listparam_fields = new java.util.ArrayList<>();
-			for (sharepoint.proxies.Column obj : _fields)
+			for (var obj : _fields) {
 				listparam_fields.add(obj.getMendixObject());
+			}
 		}
 		params.put("Fields", listparam_fields);
 
@@ -134,42 +161,39 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Drive", _drive == null ? null : _drive.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.DS_GetDriveItemsForDrive").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.DriveItem> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.DriveItem.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.DriveItem.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static java.util.List<sharepoint.proxies.DriveItem> dS_GetDriveItemsForDriveItem(IContext context, sharepoint.proxies.DriveItem _driveItem)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("DriveItem", _driveItem == null ? null : _driveItem.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.DS_GetDriveItemsForDriveItem").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.DriveItem> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.DriveItem.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.DriveItem.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static java.util.List<sharepoint.proxies.Drive> dS_GetDrives(IContext context, sharepoint.proxies.Site _site)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Site", _site == null ? null : _site.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.DS_GetDrives").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.Drive> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.Drive.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.Drive.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static sharepoint.proxies.Explorer dS_GetExplorer(IContext context)
 	{
@@ -182,28 +206,26 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("List", _list == null ? null : _list.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.DS_GetListItems").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.ListItem> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.ListItem.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.ListItem.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static java.util.List<sharepoint.proxies.List> dS_GetLists(IContext context, sharepoint.proxies.Site _site)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("Site", _site == null ? null : _site.getMendixObject());
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.DS_GetLists").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.List> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.List.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.List.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static sharepoint.proxies.DriveItem getDriveItem(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _driveItemId, java.lang.String _driveId, boolean _expandListItem)
 	{
@@ -224,14 +246,13 @@ public class Microflows
 		params.put("Filter", _filter);
 		params.put("DriveId", _driveId);
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.GetDriveItems").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.DriveItem> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.DriveItem.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.DriveItem.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static java.util.List<sharepoint.proxies.Drive> getDrives(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _siteId)
 	{
@@ -239,14 +260,13 @@ public class Microflows
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		params.put("SiteId", _siteId);
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.GetDrives").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.Drive> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.Drive.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.Drive.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static sharepoint.proxies.ListItem getListItem(IContext context, java.lang.String _siteId, java.lang.String _listId, microsoftgraph.proxies.Authorization _authorization, boolean _expandFields, java.lang.String _itemId, boolean _expandDriveItem)
 	{
@@ -271,14 +291,13 @@ public class Microflows
 		params.put("Skip", _skip);
 		params.put("ExpandDriveItem", _expandDriveItem);
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.GetListItems").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.ListItem> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.ListItem.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.ListItem.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static java.util.List<sharepoint.proxies.List> getLists(IContext context, microsoftgraph.proxies.Authorization _authorization, java.lang.String _siteId)
 	{
@@ -286,14 +305,13 @@ public class Microflows
 		params.put("Authorization", _authorization == null ? null : _authorization.getMendixObject());
 		params.put("SiteId", _siteId);
 		java.util.List<IMendixObject> objs = Core.microflowCall("Sharepoint.GetLists").withParams(params).execute(context);
-		java.util.List<sharepoint.proxies.List> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(sharepoint.proxies.List.initialize(context, obj));
+		if (objs == null) {
+			return null;
+		} else {
+			return objs.stream()
+				.map(obj -> sharepoint.proxies.List.initialize(context, obj))
+				.collect(java.util.stream.Collectors.toList());
 		}
-		return result;
 	}
 	public static sharepoint.proxies.Site getSite(IContext context, java.lang.String _siteId, microsoftgraph.proxies.Authorization _authorization)
 	{
@@ -311,6 +329,23 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("Sharepoint.SearchSites").withParams(params).execute(context);
 		return result == null ? null : sharepoint.proxies.SearchSitesResult.initialize(context, result);
 	}
+	public static sharepoint.proxies.CreateDriveItemHelper sUB_CreateDriveItemHelper_Create(IContext context, sharepoint.proxies.Explorer _explorer, sharepoint.proxies.Drive _drive, sharepoint.proxies.Site _site, sharepoint.proxies.List _list, java.lang.String _parentID)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Explorer", _explorer == null ? null : _explorer.getMendixObject());
+		params.put("Drive", _drive == null ? null : _drive.getMendixObject());
+		params.put("Site", _site == null ? null : _site.getMendixObject());
+		params.put("List", _list == null ? null : _list.getMendixObject());
+		params.put("ParentID", _parentID);
+		IMendixObject result = (IMendixObject)Core.microflowCall("Sharepoint.SUB_CreateDriveItemHelper_Create").withParams(params).execute(context);
+		return result == null ? null : sharepoint.proxies.CreateDriveItemHelper.initialize(context, result);
+	}
+	public static void sUB_OpenSite(IContext context, sharepoint.proxies.OpenSiteByIdRequest _openSiteByIdRequest)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("OpenSiteByIdRequest", _openSiteByIdRequest == null ? null : _openSiteByIdRequest.getMendixObject());
+		Core.microflowCall("Sharepoint.SUB_OpenSite").withParams(params).execute(context);
+	}
 	public static sharepoint.proxies.CompletedFileResponse sub_ResumableUpload(IContext context, java.lang.String _uploadURL, system.proxies.FileDocument _fileDocument, microsoftgraph.proxies.Authorization _authorization)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -327,12 +362,13 @@ public class Microflows
 		params.put("ItemId", _itemId);
 		params.put("ListId", _listId);
 		params.put("SiteId", _siteId);
-		java.util.ArrayList<IMendixObject> listparam_fields = null;
+		java.util.List<IMendixObject> listparam_fields = null;
 		if (_fields != null)
 		{
 			listparam_fields = new java.util.ArrayList<>();
-			for (sharepoint.proxies.Column obj : _fields)
+			for (var obj : _fields) {
 				listparam_fields.add(obj.getMendixObject());
+			}
 		}
 		params.put("Fields", listparam_fields);
 

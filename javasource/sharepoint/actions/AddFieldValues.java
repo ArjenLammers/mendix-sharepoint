@@ -34,10 +34,11 @@ public class AddFieldValues extends CustomJavaAction<java.lang.String>
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.fields = new java.util.ArrayList<sharepoint.proxies.Column>();
-		if (__fields != null)
-			for (IMendixObject __fieldsElement : __fields)
-				this.fields.add(sharepoint.proxies.Column.initialize(getContext(), __fieldsElement));
+		this.fields = java.util.Optional.ofNullable(this.__fields)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(__fieldsElement -> sharepoint.proxies.Column.initialize(getContext(), __fieldsElement))
+			.collect(java.util.stream.Collectors.toList());
 
 		// BEGIN USER CODE
 		JSONObject jsonObj = new JSONObject(json);
@@ -87,6 +88,7 @@ public class AddFieldValues extends CustomJavaAction<java.lang.String>
 
 	/**
 	 * Returns a string representation of this action
+	 * @return a string representation of this action
 	 */
 	@java.lang.Override
 	public java.lang.String toString()

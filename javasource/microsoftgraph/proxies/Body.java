@@ -4,9 +4,6 @@
 
 package microsoftgraph.proxies;
 
-/**
- * https://docs.microsoft.com/en-us/graph/api/resources/itembody?view=graph-rest-1.0
- */
 public class Body
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject bodyMendixObject;
@@ -23,11 +20,9 @@ public class Body
 	 */
 	public enum MemberNames
 	{
-		ContentType("ContentType"),
-		Content("Content"),
-		Body_Message("MicrosoftGraph.Body_Message");
+		Body_BatchRequest("MicrosoftGraph.Body_BatchRequest");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -43,15 +38,17 @@ public class Body
 
 	public Body(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Body"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Body(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject bodyMendixObject)
 	{
-		if (bodyMendixObject == null)
+		if (bodyMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Body", bodyMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Body");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, bodyMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.bodyMendixObject = bodyMendixObject;
 		this.context = context;
@@ -69,6 +66,9 @@ public class Body
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Body initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -83,6 +83,7 @@ public class Body
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -91,6 +92,7 @@ public class Body
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -113,126 +115,50 @@ public class Body
 		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
-	 * Set value of ContentType
-	 * @param contenttype
+	 * @throws com.mendix.core.CoreException
+	 * @return value of Body_BatchRequest
 	 */
-	public final microsoftgraph.proxies.ENUM_ContentType getContentType()
+	public final microsoftgraph.proxies.BatchRequest getBody_BatchRequest() throws com.mendix.core.CoreException
 	{
-		return getContentType(getContext());
+		return getBody_BatchRequest(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of ContentType
+	 * @return value of Body_BatchRequest
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final microsoftgraph.proxies.ENUM_ContentType getContentType(com.mendix.systemwideinterfaces.core.IContext context)
+	public final microsoftgraph.proxies.BatchRequest getBody_BatchRequest(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		Object obj = getMendixObject().getValue(context, MemberNames.ContentType.toString());
-		if (obj == null)
-			return null;
-
-		return microsoftgraph.proxies.ENUM_ContentType.valueOf((java.lang.String) obj);
-	}
-
-	/**
-	 * Set value of ContentType
-	 * @param contenttype
-	 */
-	public final void setContentType(microsoftgraph.proxies.ENUM_ContentType contenttype)
-	{
-		setContentType(getContext(), contenttype);
-	}
-
-	/**
-	 * Set value of ContentType
-	 * @param context
-	 * @param contenttype
-	 */
-	public final void setContentType(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_ContentType contenttype)
-	{
-		if (contenttype != null)
-			getMendixObject().setValue(context, MemberNames.ContentType.toString(), contenttype.toString());
-		else
-			getMendixObject().setValue(context, MemberNames.ContentType.toString(), null);
-	}
-
-	/**
-	 * @return value of Content
-	 */
-	public final java.lang.String getContent()
-	{
-		return getContent(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of Content
-	 */
-	public final java.lang.String getContent(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Content.toString());
-	}
-
-	/**
-	 * Set value of Content
-	 * @param content
-	 */
-	public final void setContent(java.lang.String content)
-	{
-		setContent(getContext(), content);
-	}
-
-	/**
-	 * Set value of Content
-	 * @param context
-	 * @param content
-	 */
-	public final void setContent(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String content)
-	{
-		getMendixObject().setValue(context, MemberNames.Content.toString(), content);
-	}
-
-	/**
-	 * @return value of Body_Message
-	 */
-	public final microsoftgraph.proxies.Message getBody_Message() throws com.mendix.core.CoreException
-	{
-		return getBody_Message(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of Body_Message
-	 */
-	public final microsoftgraph.proxies.Message getBody_Message(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		microsoftgraph.proxies.Message result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Body_Message.toString());
-		if (identifier != null)
-			result = microsoftgraph.proxies.Message.load(context, identifier);
+		microsoftgraph.proxies.BatchRequest result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Body_BatchRequest.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.BatchRequest.load(context, identifier);
+		}
 		return result;
 	}
 
 	/**
-	 * Set value of Body_Message
-	 * @param body_message
+	 * Set value of Body_BatchRequest
+	 * @param body_batchrequest
 	 */
-	public final void setBody_Message(microsoftgraph.proxies.Message body_message)
+	public final void setBody_BatchRequest(microsoftgraph.proxies.BatchRequest body_batchrequest)
 	{
-		setBody_Message(getContext(), body_message);
+		setBody_BatchRequest(getContext(), body_batchrequest);
 	}
 
 	/**
-	 * Set value of Body_Message
+	 * Set value of Body_BatchRequest
 	 * @param context
-	 * @param body_message
+	 * @param body_batchrequest
 	 */
-	public final void setBody_Message(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Message body_message)
+	public final void setBody_BatchRequest(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.BatchRequest body_batchrequest)
 	{
-		if (body_message == null)
-			getMendixObject().setValue(context, MemberNames.Body_Message.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.Body_Message.toString(), body_message.getMendixObject().getId());
+		if (body_batchrequest == null) {
+			getMendixObject().setValue(context, MemberNames.Body_BatchRequest.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.Body_BatchRequest.toString(), body_batchrequest.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -254,9 +180,9 @@ public class Body
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Body that = (microsoftgraph.proxies.Body) obj;
@@ -276,7 +202,7 @@ public class Body
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Body";
+		return entityName;
 	}
 
 	/**

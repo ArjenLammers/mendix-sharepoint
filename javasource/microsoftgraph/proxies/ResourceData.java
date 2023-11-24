@@ -20,12 +20,13 @@ public class ResourceData
 	 */
 	public enum MemberNames
 	{
-		_id("_id"),
+		_Id("_Id"),
 		_odata_type("_odata_type"),
 		_odata_id("_odata_id"),
+		_odata_etag("_odata_etag"),
 		ResourceData_ChangeNotification("MicrosoftGraph.ResourceData_ChangeNotification");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,15 +42,17 @@ public class ResourceData
 
 	public ResourceData(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.ResourceData"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ResourceData(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject resourceDataMendixObject)
 	{
-		if (resourceDataMendixObject == null)
+		if (resourceDataMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ResourceData", resourceDataMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.ResourceData");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, resourceDataMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.resourceDataMendixObject = resourceDataMendixObject;
 		this.context = context;
@@ -67,6 +70,9 @@ public class ResourceData
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.ResourceData initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -81,6 +87,7 @@ public class ResourceData
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -89,6 +96,7 @@ public class ResourceData
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -111,39 +119,39 @@ public class ResourceData
 		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
-	 * @return value of _id
+	 * @return value of _Id
 	 */
-	public final java.lang.String get_id()
+	public final java.lang.String get_Id()
 	{
-		return get_id(getContext());
+		return get_Id(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of _id
+	 * @return value of _Id
 	 */
-	public final java.lang.String get_id(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String get_Id(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames._id.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames._Id.toString());
 	}
 
 	/**
-	 * Set value of _id
+	 * Set value of _Id
 	 * @param _id
 	 */
-	public final void set_id(java.lang.String _id)
+	public final void set_Id(java.lang.String _id)
 	{
-		set_id(getContext(), _id);
+		set_Id(getContext(), _id);
 	}
 
 	/**
-	 * Set value of _id
+	 * Set value of _Id
 	 * @param context
 	 * @param _id
 	 */
-	public final void set_id(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _id)
+	public final void set_Id(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _id)
 	{
-		getMendixObject().setValue(context, MemberNames._id.toString(), _id);
+		getMendixObject().setValue(context, MemberNames._Id.toString(), _id);
 	}
 
 	/**
@@ -219,6 +227,43 @@ public class ResourceData
 	}
 
 	/**
+	 * @return value of _odata_etag
+	 */
+	public final java.lang.String get_odata_etag()
+	{
+		return get_odata_etag(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of _odata_etag
+	 */
+	public final java.lang.String get_odata_etag(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames._odata_etag.toString());
+	}
+
+	/**
+	 * Set value of _odata_etag
+	 * @param _odata_etag
+	 */
+	public final void set_odata_etag(java.lang.String _odata_etag)
+	{
+		set_odata_etag(getContext(), _odata_etag);
+	}
+
+	/**
+	 * Set value of _odata_etag
+	 * @param context
+	 * @param _odata_etag
+	 */
+	public final void set_odata_etag(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String _odata_etag)
+	{
+		getMendixObject().setValue(context, MemberNames._odata_etag.toString(), _odata_etag);
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ResourceData_ChangeNotification
 	 */
 	public final microsoftgraph.proxies.ChangeNotification getResourceData_ChangeNotification() throws com.mendix.core.CoreException
@@ -229,13 +274,15 @@ public class ResourceData
 	/**
 	 * @param context
 	 * @return value of ResourceData_ChangeNotification
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.ChangeNotification getResourceData_ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.ChangeNotification result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ResourceData_ChangeNotification.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.ChangeNotification.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -255,10 +302,11 @@ public class ResourceData
 	 */
 	public final void setResourceData_ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ChangeNotification resourcedata_changenotification)
 	{
-		if (resourcedata_changenotification == null)
+		if (resourcedata_changenotification == null) {
 			getMendixObject().setValue(context, MemberNames.ResourceData_ChangeNotification.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ResourceData_ChangeNotification.toString(), resourcedata_changenotification.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -280,9 +328,9 @@ public class ResourceData
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.ResourceData that = (microsoftgraph.proxies.ResourceData) obj;
@@ -302,7 +350,7 @@ public class ResourceData
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.ResourceData";
+		return entityName;
 	}
 
 	/**

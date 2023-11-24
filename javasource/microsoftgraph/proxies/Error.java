@@ -22,10 +22,11 @@ public class Error
 	{
 		Code("Code"),
 		Message("Message"),
-		Error_Request("MicrosoftGraph.Error_Request"),
-		InnerError_Error("MicrosoftGraph.InnerError_Error");
+		Error_Response("MicrosoftGraph.Error_Response"),
+		InnerError_Error("MicrosoftGraph.InnerError_Error"),
+		Error_Authorization("MicrosoftGraph.Error_Authorization");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,15 +42,17 @@ public class Error
 
 	public Error(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.Error"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Error(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject errorMendixObject)
 	{
-		if (errorMendixObject == null)
+		if (errorMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.Error", errorMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.Error");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, errorMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.errorMendixObject = errorMendixObject;
 		this.context = context;
@@ -67,6 +70,9 @@ public class Error
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.Error initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -81,6 +87,7 @@ public class Error
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -89,6 +96,7 @@ public class Error
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -183,49 +191,54 @@ public class Error
 	}
 
 	/**
-	 * @return value of Error_Request
+	 * @throws com.mendix.core.CoreException
+	 * @return value of Error_Response
 	 */
-	public final microsoftgraph.proxies.Request getError_Request() throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.Response getError_Response() throws com.mendix.core.CoreException
 	{
-		return getError_Request(getContext());
+		return getError_Response(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of Error_Request
+	 * @return value of Error_Response
+	 * @throws com.mendix.core.CoreException
 	 */
-	public final microsoftgraph.proxies.Request getError_Request(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	public final microsoftgraph.proxies.Response getError_Response(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		microsoftgraph.proxies.Request result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Error_Request.toString());
-		if (identifier != null)
-			result = microsoftgraph.proxies.Request.load(context, identifier);
+		microsoftgraph.proxies.Response result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Error_Response.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Response.load(context, identifier);
+		}
 		return result;
 	}
 
 	/**
-	 * Set value of Error_Request
-	 * @param error_request
+	 * Set value of Error_Response
+	 * @param error_response
 	 */
-	public final void setError_Request(microsoftgraph.proxies.Request error_request)
+	public final void setError_Response(microsoftgraph.proxies.Response error_response)
 	{
-		setError_Request(getContext(), error_request);
+		setError_Response(getContext(), error_response);
 	}
 
 	/**
-	 * Set value of Error_Request
+	 * Set value of Error_Response
 	 * @param context
-	 * @param error_request
+	 * @param error_response
 	 */
-	public final void setError_Request(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Request error_request)
+	public final void setError_Response(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Response error_response)
 	{
-		if (error_request == null)
-			getMendixObject().setValue(context, MemberNames.Error_Request.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.Error_Request.toString(), error_request.getMendixObject().getId());
+		if (error_response == null) {
+			getMendixObject().setValue(context, MemberNames.Error_Response.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.Error_Response.toString(), error_response.getMendixObject().getId());
+		}
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of InnerError_Error
 	 */
 	public final microsoftgraph.proxies.InnerError getInnerError_Error() throws com.mendix.core.CoreException
@@ -236,13 +249,15 @@ public class Error
 	/**
 	 * @param context
 	 * @return value of InnerError_Error
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.InnerError getInnerError_Error(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.InnerError result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.InnerError_Error.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.InnerError.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -262,10 +277,58 @@ public class Error
 	 */
 	public final void setInnerError_Error(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.InnerError innererror_error)
 	{
-		if (innererror_error == null)
+		if (innererror_error == null) {
 			getMendixObject().setValue(context, MemberNames.InnerError_Error.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.InnerError_Error.toString(), innererror_error.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of Error_Authorization
+	 */
+	public final microsoftgraph.proxies.Authorization getError_Authorization() throws com.mendix.core.CoreException
+	{
+		return getError_Authorization(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Error_Authorization
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.Authorization getError_Authorization(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.Authorization result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Error_Authorization.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Authorization.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of Error_Authorization
+	 * @param error_authorization
+	 */
+	public final void setError_Authorization(microsoftgraph.proxies.Authorization error_authorization)
+	{
+		setError_Authorization(getContext(), error_authorization);
+	}
+
+	/**
+	 * Set value of Error_Authorization
+	 * @param context
+	 * @param error_authorization
+	 */
+	public final void setError_Authorization(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Authorization error_authorization)
+	{
+		if (error_authorization == null) {
+			getMendixObject().setValue(context, MemberNames.Error_Authorization.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.Error_Authorization.toString(), error_authorization.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -287,9 +350,9 @@ public class Error
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.Error that = (microsoftgraph.proxies.Error) obj;
@@ -309,7 +372,7 @@ public class Error
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.Error";
+		return entityName;
 	}
 
 	/**

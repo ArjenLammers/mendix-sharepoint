@@ -28,9 +28,10 @@ public class ChangeNotification
 		SubscriptionExpirationDateTime("SubscriptionExpirationDateTime"),
 		SubscriptionId("SubscriptionId"),
 		TenantId("TenantId"),
-		ResourceData_ChangeNotification("MicrosoftGraph.ResourceData_ChangeNotification");
+		ResourceData_ChangeNotification("MicrosoftGraph.ResourceData_ChangeNotification"),
+		ChangeNotification_Value("MicrosoftGraph.ChangeNotification_Value");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -46,15 +47,17 @@ public class ChangeNotification
 
 	public ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.ChangeNotification"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject changeNotificationMendixObject)
 	{
-		if (changeNotificationMendixObject == null)
+		if (changeNotificationMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.ChangeNotification", changeNotificationMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.ChangeNotification");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, changeNotificationMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.changeNotificationMendixObject = changeNotificationMendixObject;
 		this.context = context;
@@ -72,6 +75,9 @@ public class ChangeNotification
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.ChangeNotification initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -86,6 +92,7 @@ public class ChangeNotification
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -94,6 +101,7 @@ public class ChangeNotification
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -167,9 +175,9 @@ public class ChangeNotification
 	public final microsoftgraph.proxies.ENUM_ChangeType getChangeType(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.ChangeType.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return microsoftgraph.proxies.ENUM_ChangeType.valueOf((java.lang.String) obj);
 	}
 
@@ -189,10 +197,11 @@ public class ChangeNotification
 	 */
 	public final void setChangeType(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_ChangeType changetype)
 	{
-		if (changetype != null)
+		if (changetype != null) {
 			getMendixObject().setValue(context, MemberNames.ChangeType.toString(), changetype.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ChangeType.toString(), null);
+		}
 	}
 
 	/**
@@ -247,9 +256,9 @@ public class ChangeNotification
 	public final microsoftgraph.proxies.ENUM_LifecycleEventType getLifecycleEvent(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.LifecycleEvent.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return microsoftgraph.proxies.ENUM_LifecycleEventType.valueOf((java.lang.String) obj);
 	}
 
@@ -269,10 +278,11 @@ public class ChangeNotification
 	 */
 	public final void setLifecycleEvent(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ENUM_LifecycleEventType lifecycleevent)
 	{
-		if (lifecycleevent != null)
+		if (lifecycleevent != null) {
 			getMendixObject().setValue(context, MemberNames.LifecycleEvent.toString(), lifecycleevent.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.LifecycleEvent.toString(), null);
+		}
 	}
 
 	/**
@@ -420,6 +430,7 @@ public class ChangeNotification
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of ResourceData_ChangeNotification
 	 */
 	public final microsoftgraph.proxies.ResourceData getResourceData_ChangeNotification() throws com.mendix.core.CoreException
@@ -430,13 +441,15 @@ public class ChangeNotification
 	/**
 	 * @param context
 	 * @return value of ResourceData_ChangeNotification
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.ResourceData getResourceData_ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.ResourceData result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ResourceData_ChangeNotification.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.ResourceData.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -456,10 +469,58 @@ public class ChangeNotification
 	 */
 	public final void setResourceData_ChangeNotification(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.ResourceData resourcedata_changenotification)
 	{
-		if (resourcedata_changenotification == null)
+		if (resourcedata_changenotification == null) {
 			getMendixObject().setValue(context, MemberNames.ResourceData_ChangeNotification.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.ResourceData_ChangeNotification.toString(), resourcedata_changenotification.getMendixObject().getId());
+		}
+	}
+
+	/**
+	 * @throws com.mendix.core.CoreException
+	 * @return value of ChangeNotification_Value
+	 */
+	public final microsoftgraph.proxies.Value getChangeNotification_Value() throws com.mendix.core.CoreException
+	{
+		return getChangeNotification_Value(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ChangeNotification_Value
+	 * @throws com.mendix.core.CoreException
+	 */
+	public final microsoftgraph.proxies.Value getChangeNotification_Value(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
+	{
+		microsoftgraph.proxies.Value result = null;
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.ChangeNotification_Value.toString());
+		if (identifier != null) {
+			result = microsoftgraph.proxies.Value.load(context, identifier);
+		}
+		return result;
+	}
+
+	/**
+	 * Set value of ChangeNotification_Value
+	 * @param changenotification_value
+	 */
+	public final void setChangeNotification_Value(microsoftgraph.proxies.Value changenotification_value)
+	{
+		setChangeNotification_Value(getContext(), changenotification_value);
+	}
+
+	/**
+	 * Set value of ChangeNotification_Value
+	 * @param context
+	 * @param changenotification_value
+	 */
+	public final void setChangeNotification_Value(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Value changenotification_value)
+	{
+		if (changenotification_value == null) {
+			getMendixObject().setValue(context, MemberNames.ChangeNotification_Value.toString(), null);
+		} else {
+			getMendixObject().setValue(context, MemberNames.ChangeNotification_Value.toString(), changenotification_value.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -481,9 +542,9 @@ public class ChangeNotification
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.ChangeNotification that = (microsoftgraph.proxies.ChangeNotification) obj;
@@ -503,7 +564,7 @@ public class ChangeNotification
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.ChangeNotification";
+		return entityName;
 	}
 
 	/**

@@ -23,7 +23,7 @@ public class Folder
 		ChildCount("ChildCount"),
 		FolderMeta("Sharepoint.FolderMeta");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -39,15 +39,17 @@ public class Folder
 
 	public Folder(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.Folder"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Folder(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject folderMendixObject)
 	{
-		if (folderMendixObject == null)
+		if (folderMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.Folder", folderMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.Folder");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, folderMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.folderMendixObject = folderMendixObject;
 		this.context = context;
@@ -65,6 +67,9 @@ public class Folder
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.Folder initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,6 +84,7 @@ public class Folder
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -87,6 +93,7 @@ public class Folder
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -145,6 +152,7 @@ public class Folder
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of FolderMeta
 	 */
 	public final sharepoint.proxies.DriveItem getFolderMeta() throws com.mendix.core.CoreException
@@ -155,13 +163,15 @@ public class Folder
 	/**
 	 * @param context
 	 * @return value of FolderMeta
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.DriveItem getFolderMeta(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.DriveItem result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.FolderMeta.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.DriveItem.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -181,10 +191,11 @@ public class Folder
 	 */
 	public final void setFolderMeta(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.DriveItem foldermeta)
 	{
-		if (foldermeta == null)
+		if (foldermeta == null) {
 			getMendixObject().setValue(context, MemberNames.FolderMeta.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.FolderMeta.toString(), foldermeta.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -206,9 +217,9 @@ public class Folder
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.Folder that = (sharepoint.proxies.Folder) obj;
@@ -228,7 +239,7 @@ public class Folder
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.Folder";
+		return entityName;
 	}
 
 	/**

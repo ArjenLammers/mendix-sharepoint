@@ -23,7 +23,7 @@ public class SearchSitesResult
 		DUmmy("DUmmy"),
 		Explorer_SearchSitesResult("Sharepoint.Explorer_SearchSitesResult");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -39,15 +39,17 @@ public class SearchSitesResult
 
 	public SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "Sharepoint.SearchSitesResult"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject searchSitesResultMendixObject)
 	{
-		if (searchSitesResultMendixObject == null)
+		if (searchSitesResultMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("Sharepoint.SearchSitesResult", searchSitesResultMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a Sharepoint.SearchSitesResult");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, searchSitesResultMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.searchSitesResultMendixObject = searchSitesResultMendixObject;
 		this.context = context;
@@ -65,6 +67,9 @@ public class SearchSitesResult
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static sharepoint.proxies.SearchSitesResult initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,6 +84,7 @@ public class SearchSitesResult
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -87,6 +93,7 @@ public class SearchSitesResult
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -145,6 +152,7 @@ public class SearchSitesResult
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Explorer_SearchSitesResult
 	 */
 	public final sharepoint.proxies.Explorer getExplorer_SearchSitesResult() throws com.mendix.core.CoreException
@@ -155,13 +163,15 @@ public class SearchSitesResult
 	/**
 	 * @param context
 	 * @return value of Explorer_SearchSitesResult
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final sharepoint.proxies.Explorer getExplorer_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		sharepoint.proxies.Explorer result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Explorer_SearchSitesResult.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = sharepoint.proxies.Explorer.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -181,10 +191,11 @@ public class SearchSitesResult
 	 */
 	public final void setExplorer_SearchSitesResult(com.mendix.systemwideinterfaces.core.IContext context, sharepoint.proxies.Explorer explorer_searchsitesresult)
 	{
-		if (explorer_searchsitesresult == null)
+		if (explorer_searchsitesresult == null) {
 			getMendixObject().setValue(context, MemberNames.Explorer_SearchSitesResult.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Explorer_SearchSitesResult.toString(), explorer_searchsitesresult.getMendixObject().getId());
+		}
 	}
 
 	/**
@@ -206,9 +217,9 @@ public class SearchSitesResult
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final sharepoint.proxies.SearchSitesResult that = (sharepoint.proxies.SearchSitesResult) obj;
@@ -228,7 +239,7 @@ public class SearchSitesResult
 	 */
 	public static java.lang.String getType()
 	{
-		return "Sharepoint.SearchSitesResult";
+		return entityName;
 	}
 
 	/**

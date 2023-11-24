@@ -18,7 +18,7 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	{
 		GroupTypes_Group("MicrosoftGraph.GroupTypes_Group");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -34,14 +34,15 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 
 	public GroupTypes(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MicrosoftGraph.GroupTypes"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected GroupTypes(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject groupTypesMendixObject)
 	{
 		super(context, groupTypesMendixObject);
-		if (!com.mendix.core.Core.isSubClassOf("MicrosoftGraph.GroupTypes", groupTypesMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MicrosoftGraph.GroupTypes");
+		if (!com.mendix.core.Core.isSubClassOf(entityName, groupTypesMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 	}
 
 	/**
@@ -56,6 +57,9 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static microsoftgraph.proxies.GroupTypes initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -69,6 +73,7 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of GroupTypes_Group
 	 */
 	public final microsoftgraph.proxies.Group getGroupTypes_Group() throws com.mendix.core.CoreException
@@ -79,13 +84,15 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	/**
 	 * @param context
 	 * @return value of GroupTypes_Group
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final microsoftgraph.proxies.Group getGroupTypes_Group(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		microsoftgraph.proxies.Group result = null;
 		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.GroupTypes_Group.toString());
-		if (identifier != null)
+		if (identifier != null) {
 			result = microsoftgraph.proxies.Group.load(context, identifier);
+		}
 		return result;
 	}
 
@@ -105,18 +112,19 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	 */
 	public final void setGroupTypes_Group(com.mendix.systemwideinterfaces.core.IContext context, microsoftgraph.proxies.Group grouptypes_group)
 	{
-		if (grouptypes_group == null)
+		if (grouptypes_group == null) {
 			getMendixObject().setValue(context, MemberNames.GroupTypes_Group.toString(), null);
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.GroupTypes_Group.toString(), grouptypes_group.getMendixObject().getId());
+		}
 	}
 
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final microsoftgraph.proxies.GroupTypes that = (microsoftgraph.proxies.GroupTypes) obj;
@@ -136,7 +144,7 @@ public class GroupTypes extends microsoftgraph.proxies.NPStringArray
 	 */
 	public static java.lang.String getType()
 	{
-		return "MicrosoftGraph.GroupTypes";
+		return entityName;
 	}
 
 	/**
